@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AE8393491FC395BC00B75CA2 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = AE8393481FC395B200B75CA2 /* Sounds */; };
+		AE83934B1FC49C9800B75CA2 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = AE83934A1FC49C9800B75CA2 /* MyTileSet.sks */; };
 		AED416EF1FC3265400ADAAB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED416EE1FC3265400ADAAB9 /* AppDelegate.swift */; };
 		AED416F11FC3265400ADAAB9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AED416F01FC3265400ADAAB9 /* GameScene.sks */; };
 		AED416F31FC3265400ADAAB9 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = AED416F21FC3265400ADAAB9 /* Actions.sks */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		AE8393481FC395B200B75CA2 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
+		AE83934A1FC49C9800B75CA2 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 		AED416EB1FC3265400ADAAB9 /* Swiftendo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swiftendo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AED416EE1FC3265400ADAAB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AED416F01FC3265400ADAAB9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				AE8393481FC395B200B75CA2 /* Sounds */,
 				AED416EE1FC3265400ADAAB9 /* AppDelegate.swift */,
 				AED416F01FC3265400ADAAB9 /* GameScene.sks */,
+				AE83934A1FC49C9800B75CA2 /* MyTileSet.sks */,
 				AED416F21FC3265400ADAAB9 /* Actions.sks */,
 				AED416F41FC3265400ADAAB9 /* GameScene.swift */,
 				AED416F61FC3265400ADAAB9 /* GameViewController.swift */,
@@ -138,6 +141,7 @@
 				AE8393491FC395BC00B75CA2 /* Sounds in Resources */,
 				AED416FA1FC3265400ADAAB9 /* Main.storyboard in Resources */,
 				AED416F11FC3265400ADAAB9 /* GameScene.sks in Resources */,
+				AE83934B1FC49C9800B75CA2 /* MyTileSet.sks in Resources */,
 				AED416FC1FC3265400ADAAB9 /* Assets.xcassets in Resources */,
 				AED416FF1FC3265400ADAAB9 /* LaunchScreen.storyboard in Resources */,
 				AED416F31FC3265400ADAAB9 /* Actions.sks in Resources */,
