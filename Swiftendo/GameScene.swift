@@ -16,19 +16,23 @@ class GameScene: SKScene {
     let fadeOut = SKAction.fadeOut(withDuration: 1)
     let remove = SKAction.removeFromParent()
     let wait = SKAction.wait(forDuration: 0.5)
-    let musics = [Bundle.main.url(forResource: "Dark_World", withExtension: "mp3", subdirectory: "Sounds/"),
-                  Bundle.main.url(forResource: "Hyrule_Castle", withExtension: "mp3", subdirectory: "Sounds/"),
-                  Bundle.main.url(forResource: "Hyrule_Field", withExtension: "mp3", subdirectory: "Sounds/")]
     
     override func didMove(to view: SKView) {
         playBackgroundMusic()
     }
     
     func playBackgroundMusic() {
-        random = arc4random_uniform(_:UInt32(musics.count))
-        backgroundMusic = SKAudioNode(url: musics[Int(random)]!)
+        backgroundMusic = SKAudioNode()
+        
+        let musicSequence = SKAction.sequence(GKRandomSource.sharedRandom().arrayByShufflingObjects(in: [
+            SKAction.playSoundFileNamed("Sounds/Dark_World.mp3", waitForCompletion: true),
+            SKAction.playSoundFileNamed("Sounds/Hyrule_Castle.mp3", waitForCompletion: true),
+            SKAction.playSoundFileNamed("Sounds/Hyrule_Field.mp3", waitForCompletion: true)
+            ]) as! [SKAction])
+        
+        let repeatForever = SKAction.repeatForever(musicSequence)
         addChild(backgroundMusic)
-        backgroundMusic.run(SKAction.play())
+        backgroundMusic.run(repeatForever)
     }
     
     
