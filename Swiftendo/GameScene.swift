@@ -11,11 +11,7 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    var random : UInt32 = 0
     var backgroundMusic: SKAudioNode!
-    let fadeOut = SKAction.fadeOut(withDuration: 1)
-    let remove = SKAction.removeFromParent()
-    let wait = SKAction.wait(forDuration: 0.5)
     
     override func didMove(to view: SKView) {
         playBackgroundMusic()
