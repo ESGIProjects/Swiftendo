@@ -8,27 +8,40 @@
 
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
-class GameScene: SKScene {
+class GameScene: SKScene, AVAudioPlayerDelegate {
     
-    var backgroundMusic: SKAudioNode!
+    var backgroundMusic: AVAudioPlayer!
+    var musicNumber: Int = 0
+    var path : String!
+    
+    let musicList = ["Sounds/Hyrule_Castle_SNES.mp3","Sounds/Hyrule_Field_SNES.mp3","Sounds/Dark_World_SNES.mp3",
+                     "Sounds/Hyrule_Field_Wii.mp3","Sounds/Lost_Woods_N64.mp3","Sounds/Gerudo_Valley_N64",
+                     "Sounds/Tal_Tal_Mountain_GB.mp3"]
     
     override func didMove(to view: SKView) {
         playBackgroundMusic()
     }
     
     func playBackgroundMusic() {
-        backgroundMusic = SKAudioNode()
         
-        let musicSequence = SKAction.sequence(GKRandomSource.sharedRandom().arrayByShufflingObjects(in: [
-            SKAction.playSoundFileNamed("Sounds/Dark_World.mp3", waitForCompletion: true),
-            SKAction.playSoundFileNamed("Sounds/Hyrule_Castle.mp3", waitForCompletion: true),
-            SKAction.playSoundFileNamed("Sounds/Hyrule_Field.mp3", waitForCompletion: true)
-            ]) as! [SKAction])
+        musicNumber = Int(arc4random_uniform(UInt32(musicList.count)))
         
-        let repeatForever = SKAction.repeatForever(musicSequence)
-        addChild(backgroundMusic)
-        backgroundMusic.run(repeatForever)
+        let path = Bundle.main.path(forResource: musicList[musicNumber], ofType:nil)!
+        let url = URL(fileURLWithPath: path)
+        do{
+            backgroundMusic = try AVAudioPlayer(contentsOf: url)
+            backgroundMusic.play()
+            backgroundMusic.delegate = self as AVAudioPlayerDelegate
+        }
+        catch{
+            print("Can't load the music !")
+        }
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        playBackgroundMusic()
     }
     
     
@@ -63,5 +76,7 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        
     }
+
 }
