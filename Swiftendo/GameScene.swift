@@ -12,9 +12,18 @@ import AVFoundation
 
 class GameScene: SKScene, AVAudioPlayerDelegate {
     
+    //init parameters for music
     var backgroundMusic: AVAudioPlayer!
     var musicNumber: Int = 0
     var path : String!
+    
+    //buttons
+    let upButton = SKSpriteNode(imageNamed: "Button_up")
+    let downButton = SKSpriteNode(imageNamed: "Button_down")
+    let leftButton = SKSpriteNode(imageNamed: "Button_left")
+    let rightButton = SKSpriteNode(imageNamed: "Button_right")
+    let startButton = SKSpriteNode(imageNamed: "Start")
+    let actionButton = SKSpriteNode(imageNamed: "A")
     
     let musicList = ["Sounds/Hyrule_Castle_SNES.mp3","Sounds/Hyrule_Field_SNES.mp3","Sounds/Dark_World_SNES.mp3",
                      "Sounds/Hyrule_Field_Wii.mp3","Sounds/Lost_Woods_N64.mp3","Sounds/Gerudo_Valley_N64",
@@ -22,6 +31,7 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
     
     override func didMove(to view: SKView) {
         playBackgroundMusic()
+        initButtons()
     }
     
     func playBackgroundMusic() {
@@ -38,6 +48,41 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
         catch{
             print("Can't load the music !")
         }
+    }
+    
+    func initButtons(){
+        
+        let size = self.frame
+        
+        upButton.position = CGPoint(x:0,y:0)
+        upButton.xScale = 0.2
+        upButton.yScale = 0.2
+        self.addChild(upButton)
+        
+        downButton.position = CGPoint(x:(size.height/2),y:(size.width/2))
+        downButton.xScale = 0.1
+        downButton.yScale = 0.1
+        self.addChild(downButton)
+        
+        leftButton.position = CGPoint(x:0,y:0)
+        leftButton.xScale = 0.2
+        leftButton.yScale = 0.2
+        self.addChild(leftButton)
+        
+        rightButton.position = CGPoint(x:0,y:0)
+        rightButton.xScale = 0.2
+        rightButton.yScale = 0.2
+        self.addChild(rightButton)
+        
+        startButton.position = CGPoint(x:0,y:0)
+        startButton.xScale = 0.2
+        startButton.yScale = 0.2
+        self.addChild(startButton)
+        
+        actionButton.position = CGPoint(x:0,y:0)
+        actionButton.xScale = 0.2
+        actionButton.yScale = 0.2
+        self.addChild(actionButton)
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
