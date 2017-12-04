@@ -34,10 +34,10 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
                      "Sounds/Tal_Tal_Mountain_GB.mp3"]
     
     override func didMove(to view: SKView) {
+		cameraNode = camera!
+		
         playBackgroundMusic()
         initButtons()
-		
-		cameraNode = camera!
     }
     
     func playBackgroundMusic() {
@@ -64,35 +64,35 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
         upButton.position = CGPoint(x:sizes.minX+75,y:sizes.minY+85)
         upButton.xScale = 0.15
         upButton.yScale = 0.15
-        self.addChild(upButton)
+        cameraNode.addChild(upButton)
         
         downButton.anchorPoint = CGPoint(x:0,y:0)
         downButton.position = CGPoint(x:sizes.minX+75,y:sizes.minY+25)
         downButton.xScale = 0.15
         downButton.yScale = 0.15
-        self.addChild(downButton)
+        cameraNode.addChild(downButton)
         
         leftButton.anchorPoint = CGPoint(x:0,y:0)
         leftButton.position = CGPoint(x:sizes.minX+40,y:sizes.minY+57.5)
         leftButton.xScale = 0.15
         leftButton.yScale = 0.15
-        self.addChild(leftButton)
+        cameraNode.addChild(leftButton)
         
         rightButton.anchorPoint = CGPoint(x:0,y:0)
         rightButton.position = CGPoint(x:sizes.minX+105,y:sizes.minY+57.5)
         rightButton.xScale = 0.15
         rightButton.yScale = 0.15
-        self.addChild(rightButton)
+        cameraNode.addChild(rightButton)
         
         startButton.position = CGPoint(x:0,y:sizes.minY+30)
         startButton.xScale = 0.6
         startButton.yScale = 0.6
-        self.addChild(startButton)
+        cameraNode.addChild(startButton)
         
         actionButton.position = CGPoint(x:sizes.maxX-70,y:sizes.minY+72.5)
         actionButton.xScale = 0.6
         actionButton.yScale = 0.6
-        self.addChild(actionButton)
+        cameraNode.addChild(actionButton)
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
