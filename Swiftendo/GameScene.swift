@@ -10,14 +10,14 @@ import SpriteKit
 import GameplayKit
 import AVFoundation
 
-class GameScene: SKScene, AVAudioPlayerDelegate {
+class GameScene: SKScene {
 	
 	var cameraNode: SKCameraNode!
 	var lastTouch: CGPoint = .zero
 	var originalTouch: CGPoint = .zero
 	
     //init parameters for music
-    var backgroundMusic: AVAudioPlayer!
+    var backgroundMusic: AVAudioPlayer?
     var musicNumber: Int = 0
     var path : String!
     
@@ -29,9 +29,16 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
     let startButton = SKSpriteNode(imageNamed: "Start")
     let actionButton = SKSpriteNode(imageNamed: "A")
     
-    let musicList = ["Sounds/Hyrule_Castle_SNES.mp3","Sounds/Hyrule_Field_SNES.mp3","Sounds/Dark_World_SNES.mp3",
-                     "Sounds/Hyrule_Field_Wii.mp3","Sounds/Lost_Woods_N64.mp3","Sounds/Gerudo_Valley_N64",
-                     "Sounds/Tal_Tal_Mountain_GB.mp3"]
+    let musicList = [
+		"Sounds/Hyrule_Castle_SNES",
+		"Sounds/Hyrule_Field_SNES",
+		"Sounds/Dark_World_SNES",
+		"Sounds/Hyrule_Field_Wii",
+		"Sounds/Lost_Woods_N64",
+		"Sounds/Gerudo_Valley_N64",
+		"Sounds/Tal_Tal_Mountain_GB"
+	]
+	
     
     override func didMove(to view: SKView) {
 		cameraNode = camera!
@@ -41,19 +48,15 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
     }
     
     func playBackgroundMusic() {
-        
-        musicNumber = Int(arc4random_uniform(UInt32(musicList.count)))
-        
-        let path = Bundle.main.path(forResource: musicList[musicNumber], ofType:nil)!
-        let url = URL(fileURLWithPath: path)
-        do{
-            backgroundMusic = try AVAudioPlayer(contentsOf: url)
-            backgroundMusic.play()
-            backgroundMusic.delegate = self as AVAudioPlayerDelegate
-        }
-        catch{
-            print("Can't load the music !")
-        }
+		
+		let selectedMusic = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: musicList).first as! String
+		
+		if let path = Bundle.main.path(forResource: selectedMusic, ofType: "mp3") {
+			let url = URL(fileURLWithPath: path)
+			backgroundMusic = try? AVAudioPlayer(contentsOf: url)
+			backgroundMusic?.play()
+			backgroundMusic?.delegate = self
+		}
     }
     
     func initButtons(){
@@ -95,11 +98,6 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
         cameraNode.addChild(actionButton)
     }
     
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        playBackgroundMusic()
-    }
-    
-    
     func touchDown(atPoint pos : CGPoint) {
 
     }
@@ -136,10 +134,14 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
-    
-    
+
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
+}
 
+extension GameScene: AVAudioPlayerDelegate {
+	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+		playBackgroundMusic()
+	}
 }
