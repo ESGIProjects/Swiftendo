@@ -11,7 +11,11 @@ import GameplayKit
 import AVFoundation
 
 class GameScene: SKScene, AVAudioPlayerDelegate {
-    
+	
+	var cameraNode: SKCameraNode!
+	var lastTouch: CGPoint = .zero
+	var originalTouch: CGPoint = .zero
+	
     //init parameters for music
     var backgroundMusic: AVAudioPlayer!
     var musicNumber: Int = 0
@@ -32,6 +36,8 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
     override func didMove(to view: SKView) {
         playBackgroundMusic()
         initButtons()
+		
+		cameraNode = camera!
     }
     
     func playBackgroundMusic() {
@@ -103,11 +109,20 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+		guard let touch = touches.first else { return }
+		lastTouch = touch.location(in: self.view)
+		originalTouch = lastTouch
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+		guard let touch = touches.first else { return }
+		let touchLocation = touch.location(in: self.view)
+		
+		let newX = cameraNode.position.x + (lastTouch.x - touchLocation.x)
+		let newY = cameraNode.position.y + (touchLocation.y - lastTouch.y)
+		
+		cameraNode.position = CGPoint(x: newX, y: newY)
+		lastTouch = touchLocation
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
