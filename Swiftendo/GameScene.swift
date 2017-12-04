@@ -67,34 +67,40 @@ class GameScene: SKScene {
         upButton.position = CGPoint(x:sizes.minX+75,y:sizes.minY+85)
         upButton.xScale = 0.15
         upButton.yScale = 0.15
+		upButton.name = "button"
         cameraNode.addChild(upButton)
         
         downButton.anchorPoint = CGPoint(x:0,y:0)
         downButton.position = CGPoint(x:sizes.minX+75,y:sizes.minY+25)
         downButton.xScale = 0.15
         downButton.yScale = 0.15
+		downButton.name = "button"
         cameraNode.addChild(downButton)
         
         leftButton.anchorPoint = CGPoint(x:0,y:0)
         leftButton.position = CGPoint(x:sizes.minX+40,y:sizes.minY+57.5)
         leftButton.xScale = 0.15
         leftButton.yScale = 0.15
+		leftButton.name = "button"
         cameraNode.addChild(leftButton)
         
         rightButton.anchorPoint = CGPoint(x:0,y:0)
         rightButton.position = CGPoint(x:sizes.minX+105,y:sizes.minY+57.5)
         rightButton.xScale = 0.15
         rightButton.yScale = 0.15
+		rightButton.name = "button"
         cameraNode.addChild(rightButton)
         
         startButton.position = CGPoint(x:0,y:sizes.minY+30)
         startButton.xScale = 0.6
         startButton.yScale = 0.6
+		startButton.name = "button"
         cameraNode.addChild(startButton)
         
         actionButton.position = CGPoint(x:sizes.maxX-70,y:sizes.minY+72.5)
         actionButton.xScale = 0.6
         actionButton.yScale = 0.6
+		actionButton.name = "button"
         cameraNode.addChild(actionButton)
     }
     
@@ -117,10 +123,16 @@ class GameScene: SKScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-		guard let touch = touches.first else { return }
+		
+		let tappedNodes = nodes(at: touch.location(in: cameraNode))
+		
+		if let node = tappedNodes.first {
+			if node.name == "button" {
+				print("Button touched")
+			} else {
+				print("Random touch")
+			}
+		}
     }
 
     override func update(_ currentTime: TimeInterval) {
