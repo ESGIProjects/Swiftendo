@@ -58,36 +58,40 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
     
     func initButtons(){
         
-        let size = self.frame
+        let sizes = self.frame
         
-        upButton.position = CGPoint(x:0,y:0)
-        upButton.xScale = 0.2
-        upButton.yScale = 0.2
+        upButton.anchorPoint = CGPoint(x:0,y:0)
+        upButton.position = CGPoint(x:sizes.minX+75,y:sizes.minY+85)
+        upButton.xScale = 0.15
+        upButton.yScale = 0.15
         self.addChild(upButton)
         
-        downButton.position = CGPoint(x:(size.height/2),y:(size.width/2))
-        downButton.xScale = 0.1
-        downButton.yScale = 0.1
+        downButton.anchorPoint = CGPoint(x:0,y:0)
+        downButton.position = CGPoint(x:sizes.minX+75,y:sizes.minY+25)
+        downButton.xScale = 0.15
+        downButton.yScale = 0.15
         self.addChild(downButton)
         
-        leftButton.position = CGPoint(x:0,y:0)
-        leftButton.xScale = 0.2
-        leftButton.yScale = 0.2
+        leftButton.anchorPoint = CGPoint(x:0,y:0)
+        leftButton.position = CGPoint(x:sizes.minX+40,y:sizes.minY+57.5)
+        leftButton.xScale = 0.15
+        leftButton.yScale = 0.15
         self.addChild(leftButton)
         
-        rightButton.position = CGPoint(x:0,y:0)
-        rightButton.xScale = 0.2
-        rightButton.yScale = 0.2
+        rightButton.anchorPoint = CGPoint(x:0,y:0)
+        rightButton.position = CGPoint(x:sizes.minX+105,y:sizes.minY+57.5)
+        rightButton.xScale = 0.15
+        rightButton.yScale = 0.15
         self.addChild(rightButton)
         
-        startButton.position = CGPoint(x:0,y:0)
-        startButton.xScale = 0.2
-        startButton.yScale = 0.2
+        startButton.position = CGPoint(x:0,y:sizes.minY+30)
+        startButton.xScale = 0.6
+        startButton.yScale = 0.6
         self.addChild(startButton)
         
-        actionButton.position = CGPoint(x:0,y:0)
-        actionButton.xScale = 0.2
-        actionButton.yScale = 0.2
+        actionButton.position = CGPoint(x:sizes.maxX-70,y:sizes.minY+72.5)
+        actionButton.xScale = 0.6
+        actionButton.yScale = 0.6
         self.addChild(actionButton)
     }
     
@@ -136,7 +140,6 @@ class GameScene: SKScene, AVAudioPlayerDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        
     }
 
 }
