@@ -25,6 +25,7 @@ class ButtonNode: SKSpriteNode {
 		let texture = SKTexture(imageNamed: imageName)
 		super.init(texture: texture, color: .clear, size: texture.size())
 		isUserInteractionEnabled = true
+		name = imageName
 	}
 	
 	convenience init (button: Button) {
