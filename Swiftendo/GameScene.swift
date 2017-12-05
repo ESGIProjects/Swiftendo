@@ -78,7 +78,7 @@ class GameScene: SKScene {
 		if let path = Bundle.main.path(forResource: selectedMusic, ofType: "mp3") {
 			let url = URL(fileURLWithPath: path)
 			backgroundMusic = try? AVAudioPlayer(contentsOf: url)
-			//backgroundMusic?.play()
+			backgroundMusic?.play()
 			backgroundMusic?.delegate = self
 		}
     }

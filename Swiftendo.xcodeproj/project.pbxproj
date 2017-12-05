@@ -17,7 +17,7 @@
 		AED416FA1FC3265400ADAAB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AED416F81FC3265400ADAAB9 /* Main.storyboard */; };
 		AED416FC1FC3265400ADAAB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AED416FB1FC3265400ADAAB9 /* Assets.xcassets */; };
 		AED416FF1FC3265400ADAAB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AED416FD1FC3265400ADAAB9 /* LaunchScreen.storyboard */; };
-		D7117EF11FD69F7F00E082E3 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7117EF01FD69F7F00E082E3 /* Button.swift */; };
+		D7117EF11FD69F7F00E082E3 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,7 @@
 		AED416FB1FC3265400ADAAB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AED416FE1FC3265400ADAAB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AED417001FC3265400ADAAB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D7117EF01FD69F7F00E082E3 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +72,7 @@
 				AE83934A1FC49C9800B75CA2 /* MyTileSet.sks */,
 				AED416F21FC3265400ADAAB9 /* Actions.sks */,
 				AED416F41FC3265400ADAAB9 /* GameScene.swift */,
-				D7117EF01FD69F7F00E082E3 /* Button.swift */,
+				D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */,
 				AED416F61FC3265400ADAAB9 /* GameViewController.swift */,
 				AED416F81FC3265400ADAAB9 /* Main.storyboard */,
 				AED416FB1FC3265400ADAAB9 /* Assets.xcassets */,
@@ -161,7 +161,7 @@
 				AED416F51FC3265400ADAAB9 /* GameScene.swift in Sources */,
 				AED416F71FC3265400ADAAB9 /* GameViewController.swift in Sources */,
 				AED416EF1FC3265400ADAAB9 /* AppDelegate.swift in Sources */,
-				D7117EF11FD69F7F00E082E3 /* Button.swift in Sources */,
+				D7117EF11FD69F7F00E082E3 /* ButtonNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
