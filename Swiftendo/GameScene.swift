@@ -28,7 +28,7 @@ class GameScene: SKScene {
     var startButton: SKSpriteNode!
     var actionButton: SKSpriteNode!
 	
-	let player = SKShapeNode(rectOf: CGSize(width: 16, height: 16))
+    let player = SKShapeNode(rectOf: CGSize(width: 16, height: 16))
     
     let musicList = [
 		"Sounds/Hyrule_Castle_SNES",
@@ -99,6 +99,7 @@ class GameScene: SKScene {
         upButton.position = CGPoint(x: frame.minX + 75, y: frame.minY + 85)
         upButton.xScale = 0.15
         upButton.yScale = 0.15
+		upButton.alpha = 0.5
 		upButton.name = "button"
         cameraNode.addChild(upButton)
 		
@@ -107,6 +108,7 @@ class GameScene: SKScene {
         downButton.position = CGPoint(x: frame.minX + 75, y: frame.minY + 25)
         downButton.xScale = 0.15
         downButton.yScale = 0.15
+		downButton.alpha = 0.5
 		downButton.name = "button"
         cameraNode.addChild(downButton)
 		
@@ -115,6 +117,7 @@ class GameScene: SKScene {
         leftButton.position = CGPoint(x: frame.minX + 40, y: frame.minY + 57.5)
         leftButton.xScale = 0.15
         leftButton.yScale = 0.15
+		leftButton.alpha = 0.5
 		leftButton.name = "button"
         cameraNode.addChild(leftButton)
 		
@@ -123,6 +126,7 @@ class GameScene: SKScene {
         rightButton.position = CGPoint(x: frame.minX + 105, y: frame.minY + 57.5)
         rightButton.xScale = 0.15
         rightButton.yScale = 0.15
+		rightButton.alpha = 0.5
 		rightButton.name = "button"
         cameraNode.addChild(rightButton)
 		
@@ -130,6 +134,7 @@ class GameScene: SKScene {
         startButton.position = CGPoint(x: 0,y: frame.minY + 30)
         startButton.xScale = 0.6
         startButton.yScale = 0.6
+		startButton.alpha = 0.5
 		startButton.name = "button"
         cameraNode.addChild(startButton)
 		
@@ -137,6 +142,7 @@ class GameScene: SKScene {
         actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
         actionButton.xScale = 0.6
         actionButton.yScale = 0.6
+		actionButton.alpha = 0.5
 		actionButton.name = "button"
         cameraNode.addChild(actionButton)
     }
