@@ -74,8 +74,22 @@ class GameScene: SKScene {
 		let tappedNodes = nodes(at: touch.location(in: cameraNode))
 		
 		if let node = tappedNodes.first {
-            if node.name == "button" {
-                print("Button touched")
+			if node.name == "buttonUp" {
+				player.run(SKAction.moveBy(x: 0, y: 16, duration: 0.2))
+				print("Up touched")
+			} else if node.name == "buttonDown" {
+				player.run(SKAction.moveBy(x: 0, y: -16, duration: 0.2))
+				print("Down touched")
+			} else if node.name == "buttonLeft" {
+				player.run(SKAction.moveBy(x: -16, y: 0, duration: 0.2))
+				print("Left touched")
+			} else if node.name == "buttonRight" {
+				player.run(SKAction.moveBy(x: 16, y: 0, duration: 0.2))
+				print("Right touched")
+			} else if node.name == "buttonStart" {
+				print("Start touched")
+			} else if node.name == "buttonAction" {
+				print("Action touched")
 			} else {
 				print("Random touch")
 			}
@@ -104,7 +118,7 @@ class GameScene: SKScene {
         upButton.xScale = 0.15
         upButton.yScale = 0.15
 		upButton.alpha = 0.5
-        upButton.name = "button"
+		upButton.name = "buttonUp"
         cameraNode.addChild(upButton)
 		
 		downButton = SKSpriteNode(imageNamed: "Button_down")
@@ -113,7 +127,7 @@ class GameScene: SKScene {
         downButton.xScale = 0.15
         downButton.yScale = 0.15
 		downButton.alpha = 0.5
-        downButton.name = "button"
+		downButton.name = "buttonDown"
         cameraNode.addChild(downButton)
 		
 		leftButton = SKSpriteNode(imageNamed: "Button_left")
@@ -122,7 +136,7 @@ class GameScene: SKScene {
         leftButton.xScale = 0.15
         leftButton.yScale = 0.15
 		leftButton.alpha = 0.5
-        leftButton.name = "button"
+		leftButton.name = "buttonLeft"
         cameraNode.addChild(leftButton)
 		
 		rightButton = SKSpriteNode(imageNamed: "Button_right")
@@ -131,7 +145,7 @@ class GameScene: SKScene {
         rightButton.xScale = 0.15
         rightButton.yScale = 0.15
 		rightButton.alpha = 0.5
-        rightButton.name = "button"
+		rightButton.name = "buttonRight"
         cameraNode.addChild(rightButton)
 		
 		startButton = SKSpriteNode(imageNamed: "Start")
@@ -139,7 +153,7 @@ class GameScene: SKScene {
         startButton.xScale = 0.6
         startButton.yScale = 0.6
 		startButton.alpha = 0.5
-        startButton.name = "button"
+		startButton.name = "buttonStart"
         cameraNode.addChild(startButton)
 		
 		actionButton = SKSpriteNode(imageNamed: "A")
@@ -147,7 +161,7 @@ class GameScene: SKScene {
         actionButton.xScale = 0.6
         actionButton.yScale = 0.6
 		actionButton.alpha = 0.5
-        actionButton.name = "button"
+		actionButton.name = "buttonAction"
         cameraNode.addChild(actionButton)
     }
 }
