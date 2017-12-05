@@ -21,12 +21,12 @@ class GameScene: SKScene {
     var musicNumber = 0
 	
     //buttons
-	var upButton: SKSpriteNode!
-    var downButton: SKSpriteNode!
-    var leftButton: SKSpriteNode!
-    var rightButton: SKSpriteNode!
-    var startButton: SKSpriteNode!
-    var actionButton: SKSpriteNode!
+	var upButton: ButtonNode!
+    var downButton: ButtonNode!
+    var leftButton: ButtonNode!
+    var rightButton: ButtonNode!
+    var startButton: ButtonNode!
+    var actionButton: ButtonNode!
 	
 	var player: SKNode!
     
@@ -63,37 +63,9 @@ class GameScene: SKScene {
 		
 		let newX = cameraNode.position.x + (lastTouch.x - touchLocation.x)
 		let newY = cameraNode.position.y + (touchLocation.y - lastTouch.y)
-		
 		cameraNode.position = CGPoint(x: newX, y: newY)
+		
 		lastTouch = touchLocation
-	}
-	
-	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-		guard let touch = touches.first else { return }
-		
-		let tappedNodes = nodes(at: touch.location(in: cameraNode))
-		
-		if let node = tappedNodes.first {
-			if node.name == "buttonUp" {
-				player.run(SKAction.moveBy(x: 0, y: 16, duration: 0.2))
-				print("Up touched")
-			} else if node.name == "buttonDown" {
-				player.run(SKAction.moveBy(x: 0, y: -16, duration: 0.2))
-				print("Down touched")
-			} else if node.name == "buttonLeft" {
-				player.run(SKAction.moveBy(x: -16, y: 0, duration: 0.2))
-				print("Left touched")
-			} else if node.name == "buttonRight" {
-				player.run(SKAction.moveBy(x: 16, y: 0, duration: 0.2))
-				print("Right touched")
-			} else if node.name == "buttonStart" {
-				print("Start touched")
-			} else if node.name == "buttonAction" {
-				print("Action touched")
-			} else {
-				print("Random touch")
-			}
-		}
 	}
 	
 	override func update(_ currentTime: TimeInterval) {
@@ -112,58 +84,75 @@ class GameScene: SKScene {
     }
     
     func initButtons() {
-		upButton = SKSpriteNode(imageNamed: "Button_up")
-		upButton.anchorPoint = CGPoint(x:0,y:0)
+		upButton = ButtonNode(button: .up)
+		upButton.action = {[unowned self] in self.touchButton(.up) }
+		upButton.anchorPoint = CGPoint(x: 0,y: 0)
         upButton.position = CGPoint(x: frame.minX + 75, y: frame.minY + 85)
         upButton.xScale = 0.15
         upButton.yScale = 0.15
 		upButton.alpha = 0.5
-		upButton.name = "buttonUp"
         cameraNode.addChild(upButton)
 		
-		downButton = SKSpriteNode(imageNamed: "Button_down")
-        downButton.anchorPoint = CGPoint(x:0,y:0)
+		downButton = ButtonNode(button: .down)
+		downButton.action = {[unowned self] in self.touchButton(.down) }
+        downButton.anchorPoint = CGPoint(x: 0,y: 0)
         downButton.position = CGPoint(x: frame.minX + 75, y: frame.minY + 25)
         downButton.xScale = 0.15
         downButton.yScale = 0.15
 		downButton.alpha = 0.5
-		downButton.name = "buttonDown"
         cameraNode.addChild(downButton)
 		
-		leftButton = SKSpriteNode(imageNamed: "Button_left")
-        leftButton.anchorPoint = CGPoint(x:0,y:0)
+		leftButton = ButtonNode(button: .left)
+		leftButton.action = {[unowned self] in self.touchButton(.left) }
+        leftButton.anchorPoint = CGPoint(x: 0,y: 0)
         leftButton.position = CGPoint(x: frame.minX + 40, y: frame.minY + 57.5)
         leftButton.xScale = 0.15
         leftButton.yScale = 0.15
 		leftButton.alpha = 0.5
-		leftButton.name = "buttonLeft"
         cameraNode.addChild(leftButton)
 		
-		rightButton = SKSpriteNode(imageNamed: "Button_right")
-        rightButton.anchorPoint = CGPoint(x:0,y:0)
+		rightButton = ButtonNode(button: .right)
+		rightButton.action = {[unowned self] in self.touchButton(.right) }
+        rightButton.anchorPoint = CGPoint(x: 0,y: 0)
         rightButton.position = CGPoint(x: frame.minX + 105, y: frame.minY + 57.5)
         rightButton.xScale = 0.15
         rightButton.yScale = 0.15
 		rightButton.alpha = 0.5
-		rightButton.name = "buttonRight"
         cameraNode.addChild(rightButton)
 		
-		startButton = SKSpriteNode(imageNamed: "Start")
+		startButton = ButtonNode(button: .start)
+		startButton.action = {[unowned self] in self.touchButton(.start) }
         startButton.position = CGPoint(x: 0,y: frame.minY + 30)
         startButton.xScale = 0.6
         startButton.yScale = 0.6
 		startButton.alpha = 0.5
-		startButton.name = "buttonStart"
         cameraNode.addChild(startButton)
 		
-		actionButton = SKSpriteNode(imageNamed: "A")
+		actionButton = ButtonNode(button: .action)
+		actionButton.action = {[unowned self] in self.touchButton(.action) }
         actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
         actionButton.xScale = 0.6
         actionButton.yScale = 0.6
 		actionButton.alpha = 0.5
-		actionButton.name = "buttonAction"
         cameraNode.addChild(actionButton)
     }
+	
+	func touchButton(_ button: Button) {
+		switch button {
+		case .up:
+			self.player.run(SKAction.moveBy(x: 0, y: 16, duration: 0.2))
+		case .down:
+			self.player.run(SKAction.moveBy(x: 0, y: -16, duration: 0.2))
+		case .left:
+			self.player.run(SKAction.moveBy(x: -16, y: 0, duration: 0.2))
+		case .right:
+			self.player.run(SKAction.moveBy(x: 16, y: 0, duration: 0.2))
+		case .start:
+			print("Start button touched")
+		case .action:
+			print("Action button touched")
+		}
+	}
 }
 
 extension GameScene: AVAudioPlayerDelegate {
