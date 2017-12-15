@@ -46,9 +46,19 @@ class GameScene: SKScene {
         playBackgroundMusic()
         initButtons()
 		
+		// Add the player into the map
 		player = SKShapeNode(rectOf: CGSize(width: 16, height: 16))
 		player.position = CGPoint(x: 0.5, y: 0.5)
 		addChild(player)
+		
+		setCameraConstraints()
+		
+		print("Frame size - width: \(frame.width) x height: \(frame.height)")
+		
+		print("Scene size - width: \(size.width) x height: \(size.height)")
+		
+		print("Frame midX: \(frame.midX) maxX: \(frame.maxX)")
+		print("Frame midY: \(frame.midY) maxY: \(frame.maxY)")
     }
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -152,6 +162,26 @@ class GameScene: SKScene {
 		case .action:
 			print("Action button touched")
 		}
+		
+		print("Player position - x: \(player.position.x) y: \(player.position.y)")
+	}
+	
+	func setCameraConstraints() {
+		// Follow the player
+		let playerRange = SKRange(constantValue: 0)
+		let playerConstraint = SKConstraint.distance(playerRange, to: player)
+		
+		// Edge constraints
+		let sceneWidth: CGFloat = 2400.0
+		let sceneHeight: CGFloat = 1200.0
+		
+		let xRange = SKRange(lowerLimit: -sceneWidth/2.0, upperLimit: sceneWidth/2.0)
+		let yRange = SKRange(lowerLimit: -sceneHeight/2.0, upperLimit: sceneHeight/2.0)
+		let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
+		edgeConstraint.referenceNode = self
+		
+		cameraNode.constraints = [playerConstraint, edgeConstraint]
+		//cameraNode.constraints = [playerConstraint]
 	}
 }
 
