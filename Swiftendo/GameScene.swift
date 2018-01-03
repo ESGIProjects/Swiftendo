@@ -48,7 +48,7 @@ class GameScene: SKScene {
 		
 		// Add the player into the map
 		player = SKShapeNode(rectOf: CGSize(width: 16, height: 16))
-		player.position = CGPoint(x: 0.5, y: 0.5)
+		player.position = CGPoint(x: 0, y: 0)
 		addChild(player)
 		
 		setCameraConstraints()
@@ -57,8 +57,8 @@ class GameScene: SKScene {
 		
 		print("Scene size - width: \(size.width) x height: \(size.height)")
 		
-		print("Frame midX: \(frame.midX) maxX: \(frame.maxX)")
-		print("Frame midY: \(frame.midY) maxY: \(frame.maxY)")
+		print("Frame mindX: \(frame.minX) maxX: \(frame.maxX)")
+		print("Frame minY: \(frame.minY) maxY: \(frame.maxY)")
     }
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -150,13 +150,13 @@ class GameScene: SKScene {
 	func touchButton(_ button: Button) {
 		switch button {
 		case .up:
-			self.player.run(SKAction.moveBy(x: 0, y: 16, duration: 0.2))
+			self.player.run(SKAction.moveBy(x: 0, y: 32, duration: 0.2))
 		case .down:
-			self.player.run(SKAction.moveBy(x: 0, y: -16, duration: 0.2))
+			self.player.run(SKAction.moveBy(x: 0, y: -32, duration: 0.2))
 		case .left:
-			self.player.run(SKAction.moveBy(x: -16, y: 0, duration: 0.2))
+			self.player.run(SKAction.moveBy(x: -32, y: 0, duration: 0.2))
 		case .right:
-			self.player.run(SKAction.moveBy(x: 16, y: 0, duration: 0.2))
+			self.player.run(SKAction.moveBy(x: 32, y: 0, duration: 0.2))
 		case .start:
 			print("Start button touched")
 		case .action:
@@ -164,23 +164,51 @@ class GameScene: SKScene {
 		}
 		
 		print("Player position - x: \(player.position.x) y: \(player.position.y)")
+		print("Camera position - x: \(cameraNode.position.x) y: \(cameraNode.position.y)")
+		print("")
+		
 	}
 	
 	func setCameraConstraints() {
 		// Follow the player
+		var cameraConstraints = [SKConstraint]()
+		
 		let playerRange = SKRange(constantValue: 0)
 		let playerConstraint = SKConstraint.distance(playerRange, to: player)
+		cameraConstraints.append(playerConstraint)
 		
 		// Edge constraints
-		let sceneWidth: CGFloat = 2400.0
-		let sceneHeight: CGFloat = 1200.0
+		//let sceneWidth: CGFloat = 2400.0
+		//let sceneHeight: CGFloat = 1200.0
 		
-		let xRange = SKRange(lowerLimit: -sceneWidth/2.0, upperLimit: sceneWidth/2.0)
-		let yRange = SKRange(lowerLimit: -sceneHeight/2.0, upperLimit: sceneHeight/2.0)
-		let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
-		edgeConstraint.referenceNode = self
+		if let tileMap = childNode(withName: "Tile Map Node") {
+			
+			/*
+			let xRange = SKRange(lowerLimit: frame.minX/4.0, upperLimit: frame.maxX/4.0)
+			let yRange = SKRange(lowerLimit: frame.minY, upperLimit: frame.maxY)
+			let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
+			edgeConstraint.referenceNode = self
+			cameraConstraints.append(edgeConstraint)
+			*/
+			
+			let rect = tileMap.calculateAccumulatedFrame()
+			print(rect)
+			print(rect.origin)
+			
+			let left = SKConstraint.positionX(SKRange(lowerLimit: cameraNode.position.x))
+			let bottom = SKConstraint.positionX(SKRange(lowerLimit: cameraNode.position.y))
+			
+			let top = SKConstraint.positionX(SKRange(upperLimit: tileMap.frame.size.height - cameraNode.position.y))
+			let right = SKConstraint.positionX(SKRange(upperLimit: tileMap.frame.size.width - cameraNode.position.x))
+			
+			cameraConstraints.append(left)
+			cameraConstraints.append(bottom)
+			cameraConstraints.append(top)
+			cameraConstraints.append(right)
+		}
 		
-		cameraNode.constraints = [playerConstraint, edgeConstraint]
+		cameraNode.constraints = cameraConstraints
+		//cameraNode.constraints = [playerConstraint, edgeConstraint]
 		//cameraNode.constraints = [playerConstraint]
 	}
 }
