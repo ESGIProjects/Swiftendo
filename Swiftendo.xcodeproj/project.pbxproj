@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE5796162004018F0039D3CA /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE5796142004018F0039D3CA /* Interface.storyboard */; };
+		AE57961F200401900039D3CA /* Swiftendo_AW Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AE57961E200401900039D3CA /* Swiftendo_AW Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AE579624200401900039D3CA /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE579623200401900039D3CA /* InterfaceController.swift */; };
+		AE579626200401900039D3CA /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE579625200401900039D3CA /* ExtensionDelegate.swift */; };
+		AE57962C200401900039D3CA /* Swiftendo_AW.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = AE5796122004018F0039D3CA /* Swiftendo_AW.app */; };
+		AE579636200402350039D3CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AED416FB1FC3265400ADAAB9 /* Assets.xcassets */; };
+		AE579637200403F30039D3CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AED416FB1FC3265400ADAAB9 /* Assets.xcassets */; };
 		AE8393491FC395BC00B75CA2 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = AE8393481FC395B200B75CA2 /* Sounds */; };
 		AE83934B1FC49C9800B75CA2 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = AE83934A1FC49C9800B75CA2 /* MyTileSet.sks */; };
 		AED416EF1FC3265400ADAAB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED416EE1FC3265400ADAAB9 /* AppDelegate.swift */; };
@@ -20,7 +27,56 @@
 		D7117EF11FD69F7F00E082E3 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AE579620200401900039D3CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AED416E31FC3265400ADAAB9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE57961D200401900039D3CA;
+			remoteInfo = "Swiftendo_AW Extension";
+		};
+		AE57962A200401900039D3CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AED416E31FC3265400ADAAB9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE5796112004018F0039D3CA;
+			remoteInfo = Swiftendo_AW;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AE579632200401900039D3CA /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AE57961F200401900039D3CA /* Swiftendo_AW Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE579634200401900039D3CA /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				AE57962C200401900039D3CA /* Swiftendo_AW.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		AE5796122004018F0039D3CA /* Swiftendo_AW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swiftendo_AW.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE5796152004018F0039D3CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		AE5796192004018F0039D3CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE57961E200401900039D3CA /* Swiftendo_AW Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Swiftendo_AW Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE579623200401900039D3CA /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		AE579625200401900039D3CA /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		AE579629200401900039D3CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE8393481FC395B200B75CA2 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 		AE83934A1FC49C9800B75CA2 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
 		AED416EB1FC3265400ADAAB9 /* Swiftendo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swiftendo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,6 +93,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AE57961B200401900039D3CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AED416E81FC3265400ADAAB9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -47,10 +110,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE5796132004018F0039D3CA /* Swiftendo_AW */ = {
+			isa = PBXGroup;
+			children = (
+				AE5796142004018F0039D3CA /* Interface.storyboard */,
+				AE5796192004018F0039D3CA /* Info.plist */,
+			);
+			path = Swiftendo_AW;
+			sourceTree = "<group>";
+		};
+		AE579622200401900039D3CA /* Swiftendo_AW Extension */ = {
+			isa = PBXGroup;
+			children = (
+				AE579623200401900039D3CA /* InterfaceController.swift */,
+				AE579625200401900039D3CA /* ExtensionDelegate.swift */,
+				AE579629200401900039D3CA /* Info.plist */,
+			);
+			path = "Swiftendo_AW Extension";
+			sourceTree = "<group>";
+		};
 		AED416E21FC3265400ADAAB9 = {
 			isa = PBXGroup;
 			children = (
 				AED416ED1FC3265400ADAAB9 /* Swiftendo */,
+				AE5796132004018F0039D3CA /* Swiftendo_AW */,
+				AE579622200401900039D3CA /* Swiftendo_AW Extension */,
 				AED416EC1FC3265400ADAAB9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				AED416EB1FC3265400ADAAB9 /* Swiftendo.app */,
+				AE5796122004018F0039D3CA /* Swiftendo_AW.app */,
+				AE57961E200401900039D3CA /* Swiftendo_AW Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,6 +171,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AE5796112004018F0039D3CA /* Swiftendo_AW */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE579633200401900039D3CA /* Build configuration list for PBXNativeTarget "Swiftendo_AW" */;
+			buildPhases = (
+				AE5796102004018F0039D3CA /* Resources */,
+				AE579632200401900039D3CA /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AE579621200401900039D3CA /* PBXTargetDependency */,
+			);
+			name = Swiftendo_AW;
+			productName = Swiftendo_AW;
+			productReference = AE5796122004018F0039D3CA /* Swiftendo_AW.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		AE57961D200401900039D3CA /* Swiftendo_AW Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE579631200401900039D3CA /* Build configuration list for PBXNativeTarget "Swiftendo_AW Extension" */;
+			buildPhases = (
+				AE57961A200401900039D3CA /* Sources */,
+				AE57961B200401900039D3CA /* Frameworks */,
+				AE57961C200401900039D3CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Swiftendo_AW Extension";
+			productName = "Swiftendo_AW Extension";
+			productReference = AE57961E200401900039D3CA /* Swiftendo_AW Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		AED416EA1FC3265400ADAAB9 /* Swiftendo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AED417031FC3265400ADAAB9 /* Build configuration list for PBXNativeTarget "Swiftendo" */;
@@ -92,10 +212,12 @@
 				AED416E71FC3265400ADAAB9 /* Sources */,
 				AED416E81FC3265400ADAAB9 /* Frameworks */,
 				AED416E91FC3265400ADAAB9 /* Resources */,
+				AE579634200401900039D3CA /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AE57962B200401900039D3CA /* PBXTargetDependency */,
 			);
 			name = Swiftendo;
 			productName = Swiftendo;
@@ -108,10 +230,18 @@
 		AED416E31FC3265400ADAAB9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = ESGI;
 				TargetAttributes = {
+					AE5796112004018F0039D3CA = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					AE57961D200401900039D3CA = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					AED416EA1FC3265400ADAAB9 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
@@ -132,11 +262,30 @@
 			projectRoot = "";
 			targets = (
 				AED416EA1FC3265400ADAAB9 /* Swiftendo */,
+				AE5796112004018F0039D3CA /* Swiftendo_AW */,
+				AE57961D200401900039D3CA /* Swiftendo_AW Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AE5796102004018F0039D3CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE579637200403F30039D3CA /* Assets.xcassets in Resources */,
+				AE5796162004018F0039D3CA /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE57961C200401900039D3CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE579636200402350039D3CA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AED416E91FC3265400ADAAB9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,6 +303,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AE57961A200401900039D3CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE579626200401900039D3CA /* ExtensionDelegate.swift in Sources */,
+				AE579624200401900039D3CA /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AED416E71FC3265400ADAAB9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -167,7 +325,28 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		AE579621200401900039D3CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AE57961D200401900039D3CA /* Swiftendo_AW Extension */;
+			targetProxy = AE579620200401900039D3CA /* PBXContainerItemProxy */;
+		};
+		AE57962B200401900039D3CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AE5796112004018F0039D3CA /* Swiftendo_AW */;
+			targetProxy = AE57962A200401900039D3CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		AE5796142004018F0039D3CA /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE5796152004018F0039D3CA /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		AED416F81FC3265400ADAAB9 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -187,6 +366,80 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AE57962D200401900039D3CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PG324D5455;
+				IBSC_MODULE = Swiftendo_AW_Extension;
+				INFOPLIST_FILE = Swiftendo_AW/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = ESGI.Swiftendo.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Debug;
+		};
+		AE57962E200401900039D3CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PG324D5455;
+				IBSC_MODULE = Swiftendo_AW_Extension;
+				INFOPLIST_FILE = Swiftendo_AW/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = ESGI.Swiftendo.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Release;
+		};
+		AE57962F200401900039D3CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PG324D5455;
+				INFOPLIST_FILE = "Swiftendo_AW Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ESGI.Swiftendo.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Debug;
+		};
+		AE579630200401900039D3CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PG324D5455;
+				INFOPLIST_FILE = "Swiftendo_AW Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ESGI.Swiftendo.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Release;
+		};
 		AED417011FC3265400ADAAB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -327,6 +580,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AE579631200401900039D3CA /* Build configuration list for PBXNativeTarget "Swiftendo_AW Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE57962F200401900039D3CA /* Debug */,
+				AE579630200401900039D3CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE579633200401900039D3CA /* Build configuration list for PBXNativeTarget "Swiftendo_AW" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE57962D200401900039D3CA /* Debug */,
+				AE57962E200401900039D3CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AED416E61FC3265400ADAAB9 /* Build configuration list for PBXProject "Swiftendo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
