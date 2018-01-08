@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 import AVFoundation
+import WatchConnectivity
 
 class GameScene: SKScene {
 	
@@ -137,14 +138,21 @@ class GameScene: SKScene {
         startButton.yScale = 0.6
 		startButton.alpha = 0.5
         cameraNode.addChild(startButton)
-		
-		actionButton = ButtonNode(button: .action)
-		actionButton.action = {[unowned self] in self.touchButton(.action) }
-        actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
-        actionButton.xScale = 0.6
-        actionButton.yScale = 0.6
-		actionButton.alpha = 0.5
-        cameraNode.addChild(actionButton)
+        
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            if !session.isWatchAppInstalled || !session.isReachable{
+                session.delegate = self as? WCSessionDelegate
+                session.activate()
+                actionButton = ButtonNode(button: .action)
+                actionButton.action = {[unowned self] in self.touchButton(.action) }
+                actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
+                actionButton.xScale = 0.6
+                actionButton.yScale = 0.6
+                actionButton.alpha = 0.5
+                cameraNode.addChild(actionButton)
+            }
+        }
     }
 	
 	func touchButton(_ button: Button) {
