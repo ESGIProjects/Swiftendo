@@ -47,7 +47,6 @@ class GameScene: SKScene {
         initButtons()
 		
 		// Add the player into the map
-		//player = SKShapeNode(rectOf: CGSize(width: 32, height: 32))
 		player = Player()
 		player.position = CGPoint(x: 0, y: 0)
 		addChild(player)
@@ -56,17 +55,11 @@ class GameScene: SKScene {
 		sq.position = CGPoint(x: 0, y: 0)
 		addChild(sq)
 		
-		//setCameraConstraints()
+		setCameraConstraints()
 		
 		Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [unowned self] _ in
 			self.launchMonsterGeneration(timeInterval: 3)
 		}
-		print("Frame size - width: \(frame.width) x height: \(frame.height)")
-		
-		print("Scene size - width: \(size.width) x height: \(size.height)")
-		
-		print("Frame mindX: \(frame.minX) maxX: \(frame.maxX)")
-		print("Frame minY: \(frame.minY) maxY: \(frame.maxY)")
     }
 	
 	func launchMonsterGeneration(timeInterval: TimeInterval) {
@@ -188,46 +181,27 @@ class GameScene: SKScene {
 	}
 	
 	func setCameraConstraints() {
-		// Follow the player
-		var cameraConstraints = [SKConstraint]()
+		guard let camera = camera else { return }
 		
-		let playerRange = SKRange(constantValue: 0)
-		let playerConstraint = SKConstraint.distance(playerRange, to: player)
-		cameraConstraints.append(playerConstraint)
+		let zeroRange = SKRange(constantValue: 0.0)
+		let playerLocationConstraint = SKConstraint.distance(zeroRange, to: player)
 		
-		// Edge constraints
-		//let sceneWidth: CGFloat = 2400.0
-		//let sceneHeight: CGFloat = 1200.0
+		let scaledSize = CGSize(width: size.width * camera.xScale, height: size.height * camera.yScale)
 		
-		if let tileMap = childNode(withName: "Tile Map Node") {
-			
-			/*
-			let xRange = SKRange(lowerLimit: frame.minX/4.0, upperLimit: frame.maxX/4.0)
-			let yRange = SKRange(lowerLimit: frame.minY, upperLimit: frame.maxY)
-			let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
-			edgeConstraint.referenceNode = self
-			cameraConstraints.append(edgeConstraint)
-			*/
-			
-			let rect = tileMap.calculateAccumulatedFrame()
-			print(rect)
-			print(rect.origin)
-			
-			let left = SKConstraint.positionX(SKRange(lowerLimit: cameraNode.position.x))
-			let bottom = SKConstraint.positionX(SKRange(lowerLimit: cameraNode.position.y))
-			
-			let top = SKConstraint.positionX(SKRange(upperLimit: tileMap.frame.size.height - cameraNode.position.y))
-			let right = SKConstraint.positionX(SKRange(upperLimit: tileMap.frame.size.width - cameraNode.position.x))
-			
-			cameraConstraints.append(left)
-			cameraConstraints.append(bottom)
-			cameraConstraints.append(top)
-			cameraConstraints.append(right)
-		}
+		let accumulatedFrame = calculateAccumulatedFrame()
 		
-		cameraNode.constraints = cameraConstraints
-		//cameraNode.constraints = [playerConstraint, edgeConstraint]
-		//cameraNode.constraints = [playerConstraint]
+		let xInset = min(scaledSize.width / 2, accumulatedFrame.width / 2)
+		let yInset = min(scaledSize.height / 2, accumulatedFrame.height / 2)
+		
+		let insetContentRect = accumulatedFrame.insetBy(dx: xInset, dy: yInset)
+		
+		let xRange = SKRange(lowerLimit: insetContentRect.minX, upperLimit: insetContentRect.maxX)
+		let yRange = SKRange(lowerLimit: insetContentRect.minY, upperLimit: insetContentRect.maxY)
+		
+		let levelEdgeConstraint = SKConstraint.positionX(xRange, y: yRange)
+		levelEdgeConstraint.referenceNode = self
+		
+		camera.constraints = [playerLocationConstraint, levelEdgeConstraint]
 	}
 }
 
