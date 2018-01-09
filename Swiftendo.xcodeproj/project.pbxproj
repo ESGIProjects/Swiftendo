@@ -19,6 +19,7 @@
 		AED416FF1FC3265400ADAAB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AED416FD1FC3265400ADAAB9 /* LaunchScreen.storyboard */; };
 		D7117EF11FD69F7F00E082E3 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */; };
 		D719E3131FE3DC3E002D6ADF /* MyScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D719E3121FE3DC3E002D6ADF /* MyScene.sks */; };
+		D798DCF52004025200B12290 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D798DCF42004025200B12290 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		AED417001FC3265400ADAAB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		D719E3121FE3DC3E002D6ADF /* MyScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyScene.sks; sourceTree = "<group>"; };
+		D798DCF42004025200B12290 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				AE83934A1FC49C9800B75CA2 /* MyTileSet.sks */,
 				AED416F21FC3265400ADAAB9 /* Actions.sks */,
 				AED416F41FC3265400ADAAB9 /* GameScene.swift */,
+				D798DCF42004025200B12290 /* Player.swift */,
 				D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */,
 				AED416F61FC3265400ADAAB9 /* GameViewController.swift */,
 				AED416F81FC3265400ADAAB9 /* Main.storyboard */,
@@ -165,6 +168,7 @@
 				AED416F51FC3265400ADAAB9 /* GameScene.swift in Sources */,
 				AED416F71FC3265400ADAAB9 /* GameViewController.swift in Sources */,
 				AED416EF1FC3265400ADAAB9 /* AppDelegate.swift in Sources */,
+				D798DCF52004025200B12290 /* Player.swift in Sources */,
 				D7117EF11FD69F7F00E082E3 /* ButtonNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

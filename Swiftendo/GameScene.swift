@@ -28,7 +28,7 @@ class GameScene: SKScene {
     var startButton: ButtonNode!
     var actionButton: ButtonNode!
 	
-	var player: SKNode!
+	var player: Player!
     
     let musicList = [
 		"Sounds/Hyrule_Castle_SNES",
@@ -47,12 +47,20 @@ class GameScene: SKScene {
         initButtons()
 		
 		// Add the player into the map
-		player = SKShapeNode(rectOf: CGSize(width: 16, height: 16))
+		//player = SKShapeNode(rectOf: CGSize(width: 32, height: 32))
+		player = Player()
 		player.position = CGPoint(x: 0, y: 0)
 		addChild(player)
 		
-		setCameraConstraints()
+		let sq = SKShapeNode(rectOf: CGSize(width: 16, height: 16))
+		sq.position = CGPoint(x: 0, y: 0)
+		addChild(sq)
 		
+		//setCameraConstraints()
+		
+		Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [unowned self] _ in
+			self.launchMonsterGeneration(timeInterval: 3)
+		}
 		print("Frame size - width: \(frame.width) x height: \(frame.height)")
 		
 		print("Scene size - width: \(size.width) x height: \(size.height)")
@@ -60,6 +68,16 @@ class GameScene: SKScene {
 		print("Frame mindX: \(frame.minX) maxX: \(frame.maxX)")
 		print("Frame minY: \(frame.minY) maxY: \(frame.maxY)")
     }
+	
+	func launchMonsterGeneration(timeInterval: TimeInterval) {
+		Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { [unowned self] _ in
+	
+			print("Launch monster generation called with timeInterval of \(timeInterval)")
+			
+			// create monster
+			self.launchMonsterGeneration(timeInterval: timeInterval)
+		}
+	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
@@ -150,13 +168,13 @@ class GameScene: SKScene {
 	func touchButton(_ button: Button) {
 		switch button {
 		case .up:
-			self.player.run(SKAction.moveBy(x: 0, y: 32, duration: 0.2))
+			player.moveTo(.up)
 		case .down:
-			self.player.run(SKAction.moveBy(x: 0, y: -32, duration: 0.2))
+			player.moveTo(.down)
 		case .left:
-			self.player.run(SKAction.moveBy(x: -32, y: 0, duration: 0.2))
+			player.moveTo(.left)
 		case .right:
-			self.player.run(SKAction.moveBy(x: 32, y: 0, duration: 0.2))
+			player.moveTo(.right)
 		case .start:
 			print("Start button touched")
 		case .action:
