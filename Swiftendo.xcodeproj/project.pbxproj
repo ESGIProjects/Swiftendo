@@ -11,7 +11,6 @@
 		AE83934B1FC49C9800B75CA2 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = AE83934A1FC49C9800B75CA2 /* MyTileSet.sks */; };
 		AED416EF1FC3265400ADAAB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED416EE1FC3265400ADAAB9 /* AppDelegate.swift */; };
 		AED416F11FC3265400ADAAB9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AED416F01FC3265400ADAAB9 /* GameScene.sks */; };
-		AED416F31FC3265400ADAAB9 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = AED416F21FC3265400ADAAB9 /* Actions.sks */; };
 		AED416F51FC3265400ADAAB9 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED416F41FC3265400ADAAB9 /* GameScene.swift */; };
 		AED416F71FC3265400ADAAB9 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED416F61FC3265400ADAAB9 /* GameViewController.swift */; };
 		AED416FA1FC3265400ADAAB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AED416F81FC3265400ADAAB9 /* Main.storyboard */; };
@@ -28,7 +27,6 @@
 		AED416EB1FC3265400ADAAB9 /* Swiftendo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swiftendo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AED416EE1FC3265400ADAAB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AED416F01FC3265400ADAAB9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		AED416F21FC3265400ADAAB9 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		AED416F41FC3265400ADAAB9 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		AED416F61FC3265400ADAAB9 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		AED416F91FC3265400ADAAB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,20 +70,51 @@
 			children = (
 				AE8393481FC395B200B75CA2 /* Sounds */,
 				AED416EE1FC3265400ADAAB9 /* AppDelegate.swift */,
-				AED416F01FC3265400ADAAB9 /* GameScene.sks */,
-				D719E3121FE3DC3E002D6ADF /* MyScene.sks */,
-				AE83934A1FC49C9800B75CA2 /* MyTileSet.sks */,
-				AED416F21FC3265400ADAAB9 /* Actions.sks */,
 				AED416F41FC3265400ADAAB9 /* GameScene.swift */,
-				D798DCF42004025200B12290 /* Player.swift */,
-				D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */,
-				AED416F61FC3265400ADAAB9 /* GameViewController.swift */,
-				AED416F81FC3265400ADAAB9 /* Main.storyboard */,
+				D7CC36C220054FA90016FF21 /* SpriteKit */,
+				D7CC36C120054F9F0016FF21 /* Controllers */,
+				D7CC36C020054F970016FF21 /* Models */,
+				D7CC36C320054FC70016FF21 /* Interface */,
 				AED416FB1FC3265400ADAAB9 /* Assets.xcassets */,
-				AED416FD1FC3265400ADAAB9 /* LaunchScreen.storyboard */,
 				AED417001FC3265400ADAAB9 /* Info.plist */,
 			);
 			path = Swiftendo;
+			sourceTree = "<group>";
+		};
+		D7CC36C020054F970016FF21 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D798DCF42004025200B12290 /* Player.swift */,
+				D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D7CC36C120054F9F0016FF21 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AED416F61FC3265400ADAAB9 /* GameViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D7CC36C220054FA90016FF21 /* SpriteKit */ = {
+			isa = PBXGroup;
+			children = (
+				AED416F01FC3265400ADAAB9 /* GameScene.sks */,
+				D719E3121FE3DC3E002D6ADF /* MyScene.sks */,
+				AE83934A1FC49C9800B75CA2 /* MyTileSet.sks */,
+			);
+			path = SpriteKit;
+			sourceTree = "<group>";
+		};
+		D7CC36C320054FC70016FF21 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				AED416F81FC3265400ADAAB9 /* Main.storyboard */,
+				AED416FD1FC3265400ADAAB9 /* LaunchScreen.storyboard */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,7 +183,6 @@
 				AED416FC1FC3265400ADAAB9 /* Assets.xcassets in Resources */,
 				AED416FF1FC3265400ADAAB9 /* LaunchScreen.storyboard in Resources */,
 				D719E3131FE3DC3E002D6ADF /* MyScene.sks in Resources */,
-				AED416F31FC3265400ADAAB9 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +271,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -294,7 +322,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
