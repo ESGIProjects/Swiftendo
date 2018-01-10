@@ -29,7 +29,7 @@ class GameScene: SKScene {
     var startButton: ButtonNode!
     var actionButton: ButtonNode!
 	
-	var player: SKNode!
+	var player: Player!
     
     let musicList = [
 		"Sounds/Hyrule_Castle_SNES",
@@ -48,19 +48,30 @@ class GameScene: SKScene {
         initButtons()
 		
 		// Add the player into the map
-		player = SKShapeNode(rectOf: CGSize(width: 16, height: 16))
+		player = Player()
 		player.position = CGPoint(x: 0, y: 0)
 		addChild(player)
 		
+		let sq = SKShapeNode(rectOf: CGSize(width: 16, height: 16))
+		sq.position = CGPoint(x: 0, y: 0)
+		addChild(sq)
+		
 		setCameraConstraints()
 		
-		print("Frame size - width: \(frame.width) x height: \(frame.height)")
-		
-		print("Scene size - width: \(size.width) x height: \(size.height)")
-		
-		print("Frame mindX: \(frame.minX) maxX: \(frame.maxX)")
-		print("Frame minY: \(frame.minY) maxY: \(frame.maxY)")
+		Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [unowned self] _ in
+			self.launchMonsterGeneration(timeInterval: 3)
+		}
     }
+	
+	func launchMonsterGeneration(timeInterval: TimeInterval) {
+		Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { [unowned self] _ in
+	
+			print("Launch monster generation called with timeInterval of \(timeInterval)")
+			
+			// create monster
+			self.launchMonsterGeneration(timeInterval: timeInterval)
+		}
+	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		guard let touch = touches.first else { return }
@@ -158,13 +169,13 @@ class GameScene: SKScene {
 	func touchButton(_ button: Button) {
 		switch button {
 		case .up:
-			self.player.run(SKAction.moveBy(x: 0, y: 32, duration: 0.2))
+			player.moveTo(.up)
 		case .down:
-			self.player.run(SKAction.moveBy(x: 0, y: -32, duration: 0.2))
+			player.moveTo(.down)
 		case .left:
-			self.player.run(SKAction.moveBy(x: -32, y: 0, duration: 0.2))
+			player.moveTo(.left)
 		case .right:
-			self.player.run(SKAction.moveBy(x: 32, y: 0, duration: 0.2))
+			player.moveTo(.right)
 		case .start:
 			print("Start button touched")
 		case .action:
@@ -178,46 +189,27 @@ class GameScene: SKScene {
 	}
 	
 	func setCameraConstraints() {
-		// Follow the player
-		var cameraConstraints = [SKConstraint]()
+		guard let camera = camera else { return }
 		
-		let playerRange = SKRange(constantValue: 0)
-		let playerConstraint = SKConstraint.distance(playerRange, to: player)
-		cameraConstraints.append(playerConstraint)
+		let zeroRange = SKRange(constantValue: 0.0)
+		let playerLocationConstraint = SKConstraint.distance(zeroRange, to: player)
 		
-		// Edge constraints
-		//let sceneWidth: CGFloat = 2400.0
-		//let sceneHeight: CGFloat = 1200.0
+		let scaledSize = CGSize(width: size.width * camera.xScale, height: size.height * camera.yScale)
 		
-		if let tileMap = childNode(withName: "Tile Map Node") {
-			
-			/*
-			let xRange = SKRange(lowerLimit: frame.minX/4.0, upperLimit: frame.maxX/4.0)
-			let yRange = SKRange(lowerLimit: frame.minY, upperLimit: frame.maxY)
-			let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
-			edgeConstraint.referenceNode = self
-			cameraConstraints.append(edgeConstraint)
-			*/
-			
-			let rect = tileMap.calculateAccumulatedFrame()
-			print(rect)
-			print(rect.origin)
-			
-			let left = SKConstraint.positionX(SKRange(lowerLimit: cameraNode.position.x))
-			let bottom = SKConstraint.positionX(SKRange(lowerLimit: cameraNode.position.y))
-			
-			let top = SKConstraint.positionX(SKRange(upperLimit: tileMap.frame.size.height - cameraNode.position.y))
-			let right = SKConstraint.positionX(SKRange(upperLimit: tileMap.frame.size.width - cameraNode.position.x))
-			
-			cameraConstraints.append(left)
-			cameraConstraints.append(bottom)
-			cameraConstraints.append(top)
-			cameraConstraints.append(right)
-		}
+		let accumulatedFrame = calculateAccumulatedFrame()
 		
-		cameraNode.constraints = cameraConstraints
-		//cameraNode.constraints = [playerConstraint, edgeConstraint]
-		//cameraNode.constraints = [playerConstraint]
+		let xInset = min(scaledSize.width / 2, accumulatedFrame.width / 2)
+		let yInset = min(scaledSize.height / 2, accumulatedFrame.height / 2)
+		
+		let insetContentRect = accumulatedFrame.insetBy(dx: xInset, dy: yInset)
+		
+		let xRange = SKRange(lowerLimit: insetContentRect.minX, upperLimit: insetContentRect.maxX)
+		let yRange = SKRange(lowerLimit: insetContentRect.minY, upperLimit: insetContentRect.maxY)
+		
+		let levelEdgeConstraint = SKConstraint.positionX(xRange, y: yRange)
+		levelEdgeConstraint.referenceNode = self
+		
+		camera.constraints = [playerLocationConstraint, levelEdgeConstraint]
 	}
 }
 
