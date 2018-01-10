@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  Swiftendo
+//
+//  Created by Jason Pierna on 10/01/2018.
+//  Copyright © 2018 ESGI. All rights reserved.
+//
+
+IOS_BUNDLE_ID = esgi.jason.swiftendo
+WATCHKIT_BUNDLE_ID = esgi.jason.swiftendo.watchkit
+WATCHEXTENSION_BUNDLE_ID = esgi.jason.swiftendo.watchkit.extension

@@ -89,6 +89,7 @@
 		AED417001FC3265400ADAAB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		D719E3121FE3DC3E002D6ADF /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		D783F8DF200648EB00C3D12E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		D798DCF42004025200B12290 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +133,7 @@
 		AED416E21FC3265400ADAAB9 = {
 			isa = PBXGroup;
 			children = (
+				D783F8DF200648EB00C3D12E /* Config.xcconfig */,
 				AED416ED1FC3265400ADAAB9 /* Swiftendo */,
 				AE5796132004018F0039D3CA /* Swiftendo_AW */,
 				AE579622200401900039D3CA /* Swiftendo_AW Extension */,
@@ -400,6 +402,7 @@
 /* Begin XCBuildConfiguration section */
 		AE57962D200401900039D3CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D783F8DF200648EB00C3D12E /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -407,7 +410,7 @@
 				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				IBSC_MODULE = Swiftendo_AW_Extension;
 				INFOPLIST_FILE = Swiftendo_AW/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = esgi.jason.swiftendo.watchkit;
+				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHKIT_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -426,7 +429,7 @@
 				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				IBSC_MODULE = Swiftendo_AW_Extension;
 				INFOPLIST_FILE = Swiftendo_AW/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = esgi.jason.swiftendo.watchkit;
+				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHKIT_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -438,13 +441,14 @@
 		};
 		AE57962F200401900039D3CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D783F8DF200648EB00C3D12E /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				INFOPLIST_FILE = "Swiftendo_AW Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = esgi.jason.swiftendo.watchkit.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHEXTENSION_BUNDLE_ID}";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -462,7 +466,7 @@
 				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				INFOPLIST_FILE = "Swiftendo_AW Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = esgi.jason.swiftendo.watchkit.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHEXTENSION_BUNDLE_ID}";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -581,15 +585,18 @@
 		};
 		AED417041FC3265400ADAAB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D783F8DF200648EB00C3D12E /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				INFOPLIST_FILE = Swiftendo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = esgi.jason.swiftendo;
+				PRODUCT_BUNDLE_IDENTIFIER = "${IOS_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -599,13 +606,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				INFOPLIST_FILE = Swiftendo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = esgi.jason.swiftendo;
+				PRODUCT_BUNDLE_IDENTIFIER = "${IOS_BUNDLE_ID}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
