@@ -205,7 +205,7 @@ class GameScene: SKScene {
 	}
     
     func attack(){
-        switch player.spriteDirection{
+        switch player.direction {
         case .up:
             shot = SKSpriteNode(imageNamed: "link-up")
             cameraNode.addChild(shot)

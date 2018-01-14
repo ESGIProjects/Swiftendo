@@ -12,17 +12,24 @@ class Player {
 	
 	var node: SKSpriteNode 
 	var health: Int
-	var spriteDirection = Direction.down
+	var direction: Direction
+	var speed: Double
 	
 	init() {
-		node = SKSpriteNode(imageNamed: "link-down")
+		health = 3
+		direction = .down
+		speed = 160
+		
+		node = SKSpriteNode(imageNamed: "link-\(direction.rawValue)")
 		node.name = "player"
 		node.zPosition = 1
-		health = 3
 	}
 	
-	static func moveTo(_ direction: Direction, duration: TimeInterval, sprite: String) -> SKAction {
-		let changeDirection = SKAction.setTexture(SKTexture(imageNamed:"\(sprite)-\(direction.rawValue)"))
+	func moveTo(_ direction: Direction) {
+		self.direction = direction
+		let changeDirection = SKAction.setTexture(SKTexture(imageNamed:"link-\(direction.rawValue)"))
+		
+		let duration = 16 / speed
 		var move: SKAction!
 		
 		switch direction {
@@ -36,13 +43,8 @@ class Player {
 			move = SKAction.moveBy(x: 16, y: 0, duration: duration)
 		}
 		
-		return SKAction.group([changeDirection, move])
-	}
-	
-	func moveTo(_ direction: Direction) {
-		node.run(Player.moveTo(direction, duration: 0.1, sprite: "link")) { [unowned self] in 
-			print("(At touch) Player position - x: \(self.node.position.x) y: \(self.node.position.y)")
+		node.run(SKAction.group([changeDirection, move])) { [unowned self] in
+			print("(After move) Player position - x: \(self.node.position.x) y: \(self.node.position.y)")
 		}
-        spriteDirection = direction
 	}
 }
