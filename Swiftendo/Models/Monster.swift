@@ -33,14 +33,39 @@ class Monster {
 	}
 	
 	func followPlayer(_ player: Player) {
-        let playerPosition = player.node.position
-        let monsterPosition = node.position
-        
-        let distance = Double(hypotf(Float(monsterPosition.x - playerPosition.x), Float(monsterPosition.y - playerPosition.y)))
-        
-        let duration = distance / speed
-        
-        // If path is changed mid-way, it will be deleted because the new action will have the same key
-        node.run(SKAction.move(to: playerPosition, duration: duration), withKey: "follow")
+		
+		if health > 0 {
+			let playerPosition = player.node.position
+			let monsterPosition = node.position
+			
+			let distance = Double(hypotf(Float(monsterPosition.x - playerPosition.x), Float(monsterPosition.y - playerPosition.y)))
+			
+			let duration = distance / speed
+			
+			// If path is changed mid-way, it will be deleted because the new action will have the same key
+			node.run(SKAction.move(to: playerPosition, duration: duration), withKey: "follow")
+		}
+	}
+	
+	func takeDamage() {
+		health = health - 1
+		
+		let blinkSequence = SKAction.sequence([
+			SKAction.fadeOut(withDuration: 0.2),
+			SKAction.fadeIn(withDuration: 0.2),
+			SKAction.fadeOut(withDuration: 0.2)
+		])
+		
+		var action: SKAction!
+		
+		if health > 0 {
+			action = SKAction.sequence([blinkSequence, SKAction.fadeIn(withDuration: 0.1)])
+		} else {
+			node.removeAction(forKey: "follow")
+			
+			action = SKAction.sequence([blinkSequence, SKAction.removeFromParent()])
+		}
+		
+		node.run(action)
 	}
 }

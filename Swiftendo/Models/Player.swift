@@ -10,12 +10,18 @@ import SpriteKit
 
 class Player {
 	
+	var scene: GameScene!
+	
 	var node: SKSpriteNode 
 	var health: Int
 	var direction: Direction
 	var speed: Double
 	
-    init() {
+	var lastTimeHit = TimeInterval(0)
+	
+	init(scene: GameScene) {
+		self.scene = scene
+		
 		health = 3
 		direction = .down
 		speed = 160
@@ -60,5 +66,31 @@ class Player {
 		scene.addChild(pokeball.node)
 		
 		pokeball.fire(in: direction)
+	}
+	
+	func takeDamage() {
+		
+		if CACurrentMediaTime() - lastTimeHit > TimeInterval(3) {
+			lastTimeHit = CACurrentMediaTime()
+			health = health - 1
+			
+			let blinkSequence = SKAction.sequence([
+				SKAction.fadeAlpha(to: 0.3, duration: 0.5),
+				SKAction.fadeIn(withDuration: 0.5),
+				SKAction.fadeAlpha(to: 0.3, duration: 0.5),
+				SKAction.fadeIn(withDuration: 0.5),
+				SKAction.fadeAlpha(to: 0.3, duration: 0.5)
+			])
+			
+			var action: SKAction!
+			
+			if health > 0 {
+				action = SKAction.sequence([blinkSequence, SKAction.fadeIn(withDuration: 0.5)])
+			} else {
+				action = SKAction.sequence([blinkSequence, SKAction.run { [unowned self] in self.scene.gameOver() }])
+			}
+			
+			node.run(action)
+		}
 	}
 }

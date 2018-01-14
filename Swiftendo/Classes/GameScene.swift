@@ -62,6 +62,7 @@ class GameScene: SKScene {
 		// Set properties
 		cameraNode = camera!
 		tileMapNode = childNode(withName: "Tile Map Node") as! SKTileMapNode
+		physicsWorld.contactDelegate = self
 
 		// Start watch session
 		startSession()
@@ -226,10 +227,9 @@ class GameScene: SKScene {
 	// MARK: - Create new entity
 	
 	func spawnPlayer() -> Player{
-		let player = Player()
+		let player = Player(scene: self)
 		
 		player.node.position = CGPoint(x: 0, y: 0)
-		player.node.zPosition = 0
 		
 		return player
 	}
@@ -238,10 +238,51 @@ class GameScene: SKScene {
 		let monster = Monster()
 		
 		monster.node.position = CGPoint(x: 0, y: 0)
-		monster.node.zPosition = 0
 		
 		return monster
 	}
+	
+	// MARK: - Collisions
+	
+	func collisionBetween(monster monsterNode: SKNode, player playerNode: SKNode) {
+		// Player takes damage
+		player.takeDamage()
+	}
+	
+	func collisionBetween(monster monsterNode: SKNode, pokeball: SKNode) {
+		guard let monster = findMonster(from: monsterNode) else { return }
+		
+		// Monster takes damage
+		pokeball.removeFromParent()
+		monster.takeDamage()
+	}
+	
+	func findMonster(from node: SKNode) -> Monster? {
+		for monster in monsters {
+			if monster.node == node {
+				return monster
+			}
+		}
+		
+		return nil
+	}
+	
+	func gameOver() {
+		print("Game over!")
+	}
+	
+	func restart() {
+		
+	}
+	
+	func pause() {
+		
+	}
+	
+	func resume() {
+		
+	}
+	
 }
 
 // MARK: - AVAudioPlayerDelegate
@@ -251,6 +292,30 @@ extension GameScene: AVAudioPlayerDelegate {
 	}
 }
 
+// MARK: - SKPhysicsContactDelegate
+extension GameScene: SKPhysicsContactDelegate {
+	func didBegin(_ contact: SKPhysicsContact) {
+		if contact.bodyA.node?.name == "monster" {
+			if contact.bodyB.node?.name == "player" {
+				print("Player collision")
+				collisionBetween(monster: contact.bodyA.node!, player: contact.bodyB.node!)
+			} else if contact.bodyB.node?.name == "pokeball" {
+				print("Pokeball collision")
+				collisionBetween(monster: contact.bodyA.node!, pokeball: contact.bodyB.node!)
+			}
+		} else if contact.bodyB.node?.name == "monster" {
+			if contact.bodyA.node?.name == "player" {
+				print("Player collision")
+				collisionBetween(monster: contact.bodyB.node!, player: contact.bodyA.node!)
+			} else if contact.bodyA.node?.name == "pokeball" {
+				print("Pokeball collision")
+				collisionBetween(monster: contact.bodyB.node!, pokeball: contact.bodyA.node!)
+			}
+		}
+	}
+}
+
+// MARK: - WCSessionDelegate
 extension GameScene: WCSessionDelegate{
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
