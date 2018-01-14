@@ -92,7 +92,7 @@ extension SKTileMapNode {
 					break;
 				}
 				
-				//actions.append(SKAction.wait(forDuration: 0.2))
+				actions.append(SKAction.wait(forDuration: 0.2))
 				
 				/*if let parent = parent {
 					let pathNode = SKShapeNode(rectOf: CGSize(width: tileSize.width, height: tileSize.height))

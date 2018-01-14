@@ -61,8 +61,6 @@ class GameScene: SKScene {
 		tileMapNode = childNode(withName: "Tile Map Node") as! SKTileMapNode
 		
 		// Set player property
-		//entityManager.spawnPlayer()
-		//guard let player = entityManager.player else { return }
 		player = spawnPlayer()
 		addChild(player.node)
 		
@@ -74,38 +72,26 @@ class GameScene: SKScene {
 		setCameraConstraints()
 		
 		// Start enemy spawn 5 seconds later
-		Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [unowned self] _ in
-			self.launchMonsterGeneration(timeInterval: 2)
+		Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [unowned self] _ in
+			self.launchMonsterGeneration(timeInterval: 10)
 		}
     }
 	
 	override func update(_ currentTime: TimeInterval) {
 		// Called before each frame is rendered
-		let playerPosition = CGPoint(x: Int(round(self.player.node.position.x/16)), y: Int(round(self.player.node.position.y/16)))
-		
-		for monster in self.monsters {
-			//monster.node.removeAction(forKey: "path")
-			let monsterPosition = CGPoint(x: Int(round(monster.node.position.x/16)), y: Int(round(monster.node.position.y/16)))
-			
-			DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-				let path = self.tileMapNode.path(from: monsterPosition, to: playerPosition)
-				DispatchQueue.main.async {
-					monster.followPath(path)
-				}
-			}
-		}
 	}
 	
 	func launchMonsterGeneration(timeInterval: TimeInterval) {
 		Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { [unowned self] _ in
 	
-			print("Launch monster generation called with timeInterval of \(timeInterval)")
 			let monster = self.spawnMonster()
 			self.monsters.append(monster)
 			self.addChild(monster.node)
 			
+			monster.followPlayer(self.player)
+			
 			// create monster
-			//self.launchMonsterGeneration(timeInterval: timeInterval)
+			self.launchMonsterGeneration(timeInterval: max(timeInterval-1, 3))
 		}
 	}
 	
@@ -195,23 +181,13 @@ class GameScene: SKScene {
 			player.moveTo(.right)
 		case .start:
 			print("Start button touched")
-			
-			let start = CGPoint(x: Int(round(player.node.position.x)/16), y: Int(round(player.node.position.y)/16))
-			let end = CGPoint(x: start.x + 5, y: start.y)
-			
-			let actions = tileMapNode.path(from: start, to: end)
-			let sequence = SKAction.sequence(actions)
-			
-			player.node.run(sequence, withKey: "move") { [unowned self] in
-				print("(After sequence) Player position - x: \(self.player.node.position.x) y: \(self.player.node.position.y)")
-			}
 		case .action:
 			print("Action button touched")
 		}
 		
-
-		
-		
+		for monster in monsters {
+			monster.followPlayer(player)
+		}
 	}
 	
 	func setCameraConstraints() {
@@ -243,35 +219,20 @@ class GameScene: SKScene {
 	func spawnPlayer() -> Player{
 		let player = Player()
 		
-		
 		player.node.position = CGPoint(x: 0, y: 0)
-
 		player.node.zPosition = 0
 		
-		//add(player)
 		return player
 	}
 	
 	func spawnMonster() -> Monster {
 		let monster = Monster()
 		
-		
-		// 1. get GKGrid
-		// 2. select random tile
-		
-		
 		monster.node.position = CGPoint(x: 0, y: 0)
 		monster.node.zPosition = 0
 		
 		return monster
-		
-		
-		//add(monster)
 	}
-	
-	
-	
-	
 }
 
 // MARK: - AVAudioPlayerDelegate

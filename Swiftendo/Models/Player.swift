@@ -10,7 +10,7 @@ import SpriteKit
 
 class Player {
 	
-	var node: SKNode
+	var node: SKSpriteNode
 	var health: Int
 	
 	init() {

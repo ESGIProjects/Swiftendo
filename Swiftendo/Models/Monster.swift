@@ -12,11 +12,11 @@ import GameplayKit
 
 class Monster {
 	
-	var node: SKNode
+	var node: SKSpriteNode
 	var health: Int
 	
 	init() {
-		node = SKSpriteNode(imageNamed: "link-right")
+		node = SKSpriteNode(imageNamed: "metroid")
 		node.name = "monster"
 		health = 1
 	}
@@ -25,8 +25,15 @@ class Monster {
 		node.run(Player.moveTo(direction, duration: 0.1, sprite: "link"))
 	}
 	
-	func followPath(_ path: [SKAction]) {
+	func followPlayer(_ player: Player) {
+		let playerPosition = player.node.position
+		let monsterPosition = node.position
+		
+		let distance = hypotf(Float(monsterPosition.x - playerPosition.x), Float(monsterPosition.y - playerPosition.y))
+		
+		print(distance)
+		
 		// If path is changed mid-way, it will be deleted because the new action will have the same key
-		node.run(SKAction.sequence(path), withKey: "path")
+		node.run(SKAction.move(to: playerPosition, duration: 1))
 	}
 }
