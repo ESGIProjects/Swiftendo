@@ -11,17 +11,35 @@ import SpriteKit
 class Pokeball {
 	
 	var node: SKSpriteNode
+	var reach: CGFloat
 	var speed: Double
 	
 	init(at position: CGPoint) {
-		speed = 100
+		reach = 200
+		speed = 320
 		
 		node = SKSpriteNode(imageNamed: "pokeball")
 		node.position = position
 		node.name = "pokeball"
 	}
 	
-	func fire(in: Direction) {
+	func fire(in direction: Direction) {
+		var action: SKAction!
 		
+		let duration = Double(reach) / speed
+
+		switch direction {
+		case .up:
+			action = SKAction.moveBy(x: 0, y: reach, duration: duration)
+		case .down:
+			action = SKAction.moveBy(x: 0, y: -reach, duration: duration)
+		case .left:
+			action = SKAction.moveBy(x: -reach, y: 0, duration: duration)
+		case .right:
+			action = SKAction.moveBy(x: reach, y: 0, duration: duration)
+		}
+		
+		node.run(SKAction.sequence([action, SKAction.removeFromParent()]))
+
 	}
 }
