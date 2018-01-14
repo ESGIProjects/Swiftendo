@@ -38,14 +38,6 @@ class GameScene: SKScene {
 		"Sounds/Gerudo_Valley_N64",
 		"Sounds/Tal_Tal_Mountain_GB"
 	]
-
-	var shot: SKSpriteNode!
-    let upShot = SKAction.sequence([SKAction.moveBy(x: 0, y: 256, duration: 0.4),SKAction.removeFromParent()])
-    let downShot = SKAction.sequence([SKAction.moveBy(x: 0, y: -256, duration: 0.4),SKAction.removeFromParent()])
-    let leftShot = SKAction.sequence([SKAction.moveBy(x: -256, y: 0, duration: 0.4),SKAction.removeFromParent()])
-    let rightShot = SKAction.sequence([SKAction.moveBy(x: 256, y: 0, duration: 0.4),SKAction.removeFromParent()])
-    
-    var session: WCSession?
 	
 	// MARK: - Button properties
 	
@@ -60,6 +52,9 @@ class GameScene: SKScene {
 	
 	var player: Player!
 	var monsters = [Monster]()
+	
+	// MARK: - Apple Watch session
+	var session: WCSession?
 	
 	// MARK: - SKScene
     
@@ -196,34 +191,13 @@ class GameScene: SKScene {
 		case .start:
 			print("Start button touched")
 		case .action:
-            attack()
+            player.fire()
 		}
 		
 		for monster in monsters {
 			monster.followPlayer(player)
 		}
 	}
-    
-    func attack(){
-        switch player.direction {
-        case .up:
-            shot = SKSpriteNode(imageNamed: "link-up")
-            cameraNode.addChild(shot)
-            shot.run(upShot)
-        case .down:
-            shot = SKSpriteNode(imageNamed: "link-down")
-            cameraNode.addChild(shot)
-            shot.run(downShot)
-        case .left:
-            shot = SKSpriteNode(imageNamed: "link-left")
-            cameraNode.addChild(shot)
-            shot.run(leftShot)
-        case .right:
-            shot = SKSpriteNode(imageNamed: "link-right")
-            cameraNode.addChild(shot)
-            shot.run(rightShot) 
-        }
-    }
 	
 	func setCameraConstraints() {
 		guard let camera = camera else { return }
@@ -280,7 +254,7 @@ extension GameScene: AVAudioPlayerDelegate {
 extension GameScene: WCSessionDelegate{
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        attack()
+        touchButton(.action)
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {

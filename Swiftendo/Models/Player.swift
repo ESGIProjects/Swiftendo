@@ -47,4 +47,26 @@ class Player {
 			print("(After move) Player position - x: \(self.node.position.x) y: \(self.node.position.y)")
 		}
 	}
+	
+	func fire() {
+		guard let scene = node.parent else { return }
+		
+		let pokeball = Pokeball(at: node.position)
+		scene.addChild(pokeball.node)
+		
+		var action: SKAction!
+		
+		switch direction {
+		case .up:
+			action = SKAction.moveBy(x: 0, y: 256, duration: 0.4)
+		case .down:
+			action = SKAction.moveBy(x: 0, y: -256, duration: 0.4)
+		case .left:
+			action = SKAction.moveBy(x: -256, y: 0, duration: 0.4)
+		case .right:
+			action = SKAction.moveBy(x: 256, y: 0, duration: 0.4)
+		}
+		
+		pokeball.node.run(SKAction.sequence([action, SKAction.removeFromParent()]))
+	}
 }
