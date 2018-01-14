@@ -8,37 +8,39 @@
 
 import SpriteKit
 
-class Player: SKSpriteNode {
+class Player {
 	
-	enum Direction: String {
-		case up = "up"
-		case down = "down"
-		case left = "left"
-		case right = "right"
-	}
+	var node: SKNode
+	var health: Int
 	
 	init() {
-		let texture = SKTexture(imageNamed: "link-down")
-		super.init(texture: texture, color: .clear, size: texture.size())
+		node = SKSpriteNode(imageNamed: "link-down")
+		node.name = "player"
+		node.zPosition = 1
+		health = 3
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-	
-	func moveTo(_ direction: Direction) {
-		
-		texture = SKTexture(imageNamed: "link-\(direction.rawValue)")
+	static func moveTo(_ direction: Direction, duration: TimeInterval, sprite: String) -> SKAction {
+		let changeDirection = SKAction.setTexture(SKTexture(imageNamed:"\(sprite)-\(direction.rawValue)"))
+		var move: SKAction!
 		
 		switch direction {
 		case .up:
-			run(SKAction.moveBy(x: 0, y: 16, duration: 0.1))
+			move = SKAction.moveBy(x: 0, y: 16, duration: duration)
 		case .down:
-			run(SKAction.moveBy(x: 0, y: -16, duration: 0.1))
+			move = SKAction.moveBy(x: 0, y: -16, duration: duration)
 		case .left:
-			run(SKAction.moveBy(x: -16, y: 0, duration: 0.1))
+			move = SKAction.moveBy(x: -16, y: 0, duration: duration)
 		case .right:
-			run(SKAction.moveBy(x: 16, y: 0, duration: 0.1))
+			move = SKAction.moveBy(x: 16, y: 0, duration: duration)
+		}
+		
+		return SKAction.group([changeDirection, move])
+	}
+	
+	func moveTo(_ direction: Direction) {
+		node.run(Player.moveTo(direction, duration: 0.1, sprite: "link")) { [unowned self] in 
+			print("(At touch) Player position - x: \(self.node.position.x) y: \(self.node.position.y)")
 		}
 	}
 }
