@@ -19,8 +19,14 @@ class Pokeball {
 		speed = 320
 		
 		node = SKSpriteNode(imageNamed: "pokeball")
-		node.position = position
 		node.name = "pokeball"
+		node.position = position
+		node.zPosition = 2
+		
+		node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
+		node.physicsBody?.categoryBitMask = CollisionTypes.pokeball.rawValue
+		node.physicsBody?.contactTestBitMask = CollisionTypes.monster.rawValue
+		node.physicsBody?.collisionBitMask = 0
 	}
 	
 	func fire(in direction: Direction) {

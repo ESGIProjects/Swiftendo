@@ -15,7 +15,7 @@ class Player {
 	var direction: Direction
 	var speed: Double
 	
-	init() {
+    init() {
 		health = 3
 		direction = .down
 		speed = 160
@@ -23,6 +23,11 @@ class Player {
 		node = SKSpriteNode(imageNamed: "link-\(direction.rawValue)")
 		node.name = "player"
 		node.zPosition = 1
+		
+		node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
+		node.physicsBody?.categoryBitMask = CollisionTypes.player.rawValue
+		node.physicsBody?.contactTestBitMask = CollisionTypes.monster.rawValue
+		node.physicsBody?.collisionBitMask = 0
 	}
 	
 	func moveTo(_ direction: Direction) {
