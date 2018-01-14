@@ -25,6 +25,7 @@
 		D7117EF11FD69F7F00E082E3 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7117EF01FD69F7F00E082E3 /* Button.swift */; };
 		D719E3131FE3DC3E002D6ADF /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D719E3121FE3DC3E002D6ADF /* GameScene.sks */; };
 		D71CD259200BCBB70082D273 /* Pokeball.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CD258200BCBB70082D273 /* Pokeball.swift */; };
+		D71CD261200BF25A0082D273 /* CollisionTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71CD260200BF25A0082D273 /* CollisionTypes.swift */; };
 		D758B3EE200B727A009D5F37 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D758B3ED200B727A009D5F37 /* Direction.swift */; };
 		D758B3F0200B72E0009D5F37 /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D758B3EF200B72E0009D5F37 /* ButtonType.swift */; };
 		D76CB5FF200A550700C6557E /* SKNode+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76CB5FE200A550700C6557E /* SKNode+Action.swift */; };
@@ -95,6 +96,7 @@
 		D7117EF01FD69F7F00E082E3 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		D719E3121FE3DC3E002D6ADF /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		D71CD258200BCBB70082D273 /* Pokeball.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokeball.swift; sourceTree = "<group>"; };
+		D71CD260200BF25A0082D273 /* CollisionTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionTypes.swift; sourceTree = "<group>"; };
 		D758B3ED200B727A009D5F37 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		D758B3EF200B72E0009D5F37 /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
 		D76CB5FE200A550700C6557E /* SKNode+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKNode+Action.swift"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				D758B3ED200B727A009D5F37 /* Direction.swift */,
 				D758B3EF200B72E0009D5F37 /* ButtonType.swift */,
+				D71CD260200BF25A0082D273 /* CollisionTypes.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				D71CD259200BCBB70082D273 /* Pokeball.swift in Sources */,
 				AED416EF1FC3265400ADAAB9 /* AppDelegate.swift in Sources */,
 				D798DCF52004025200B12290 /* Player.swift in Sources */,
+				D71CD261200BF25A0082D273 /* CollisionTypes.swift in Sources */,
 				D758B3F0200B72E0009D5F37 /* ButtonType.swift in Sources */,
 				D76CB5FF200A550700C6557E /* SKNode+Action.swift in Sources */,
 				D7117EF11FD69F7F00E082E3 /* Button.swift in Sources */,
