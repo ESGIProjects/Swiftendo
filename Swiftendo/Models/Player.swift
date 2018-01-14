@@ -9,6 +9,8 @@
 import SpriteKit
 
 class Player: SKSpriteNode {
+    
+    var spriteDirection = Direction.down
 	
 	enum Direction: String {
 		case up = "up"
@@ -40,5 +42,6 @@ class Player: SKSpriteNode {
 		case .right:
 			run(SKAction.moveBy(x: 16, y: 0, duration: 0.1))
 		}
+        spriteDirection = direction
 	}
 }

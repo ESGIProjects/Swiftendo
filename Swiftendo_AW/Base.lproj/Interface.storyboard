@@ -14,11 +14,12 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Swiftendo_AW" customModuleProvider="target">
                     <items>
-                        <imageView alignment="center" verticalAlignment="center" id="D5j-NY-dqu"/>
+                        <button width="75" height="75" alignment="center" verticalAlignment="center" backgroundImage="buttonAction" id="Ne5-gw-jc1">
+                            <connections>
+                                <action selector="action" destination="AgC-eL-Hgc" id="3Pq-hn-7tS"/>
+                            </connections>
+                        </button>
                     </items>
-                    <connections>
-                        <outlet property="button" destination="D5j-NY-dqu" id="NWm-A3-sIH"/>
-                    </connections>
                 </controller>
             </objects>
         </scene>

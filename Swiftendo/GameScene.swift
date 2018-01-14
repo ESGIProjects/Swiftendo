@@ -12,7 +12,7 @@ import AVFoundation
 import WatchConnectivity
 
 class GameScene: SKScene {
-	
+    
 	var cameraNode: SKCameraNode!
 	var lastTouch: CGPoint = .zero
 	var originalTouch: CGPoint = .zero
@@ -31,6 +31,14 @@ class GameScene: SKScene {
 	
 	var player: Player!
     
+    var shot: SKSpriteNode!
+    let upShot = SKAction.sequence([SKAction.moveBy(x: 0, y: 256, duration: 0.4),SKAction.removeFromParent()])
+    let downShot = SKAction.sequence([SKAction.moveBy(x: 0, y: -256, duration: 0.4),SKAction.removeFromParent()])
+    let leftShot = SKAction.sequence([SKAction.moveBy(x: -256, y: 0, duration: 0.4),SKAction.removeFromParent()])
+    let rightShot = SKAction.sequence([SKAction.moveBy(x: 256, y: 0, duration: 0.4),SKAction.removeFromParent()])
+    
+    var session: WCSession?
+    
     let musicList = [
 		"Sounds/Hyrule_Castle_SNES",
 		"Sounds/Hyrule_Field_SNES",
@@ -44,6 +52,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
 		cameraNode = camera!
 		
+        startSession()
         playBackgroundMusic()
         initButtons()
 		
@@ -106,6 +115,7 @@ class GameScene: SKScene {
     }
     
     func initButtons() {
+        
 		upButton = ButtonNode(button: .up)
 		upButton.action = {[unowned self] in self.touchButton(.up) }
 		upButton.anchorPoint = CGPoint(x: 0,y: 0)
@@ -149,20 +159,23 @@ class GameScene: SKScene {
         startButton.yScale = 0.6
 		startButton.alpha = 0.5
         cameraNode.addChild(startButton)
-        
-        if WCSession.isSupported() {
-            let session = WCSession.default
-            if !session.isWatchAppInstalled || !session.isReachable{
-                session.delegate = self as? WCSessionDelegate
-                session.activate()
-                actionButton = ButtonNode(button: .action)
-                actionButton.action = {[unowned self] in self.touchButton(.action) }
-                actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
-                actionButton.xScale = 0.6
-                actionButton.yScale = 0.6
-                actionButton.alpha = 0.5
-                cameraNode.addChild(actionButton)
-            }
+
+        if !(session?.isReachable)! || !(session?.isPaired)!{
+            actionButton = ButtonNode(button: .action)
+            actionButton.action = {[unowned self] in self.touchButton(.action) }
+            actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
+            actionButton.xScale = 0.6
+            actionButton.yScale = 0.6
+            actionButton.alpha = 0.5
+            cameraNode.addChild(actionButton)
+        }
+    }
+    
+    func startSession(){
+        if WCSession.isSupported(){
+            session = WCSession.default
+            session?.delegate = self
+            session?.activate()
         }
     }
 	
@@ -179,14 +192,34 @@ class GameScene: SKScene {
 		case .start:
 			print("Start button touched")
 		case .action:
-			print("Action button touched")
+            attack()
 		}
 		
 		print("Player position - x: \(player.position.x) y: \(player.position.y)")
 		print("Camera position - x: \(cameraNode.position.x) y: \(cameraNode.position.y)")
 		print("")
-		
 	}
+    
+    func attack(){
+        switch player.spriteDirection{
+        case .up:
+            shot = SKSpriteNode(imageNamed: "link-up")
+            cameraNode.addChild(shot)
+            shot.run(upShot)
+        case .down:
+            shot = SKSpriteNode(imageNamed: "link-down")
+            cameraNode.addChild(shot)
+            shot.run(downShot)
+        case .left:
+            shot = SKSpriteNode(imageNamed: "link-left")
+            cameraNode.addChild(shot)
+            shot.run(leftShot)
+        case .right:
+            shot = SKSpriteNode(imageNamed: "link-right")
+            cameraNode.addChild(shot)
+            shot.run(rightShot)
+        }
+    }
 	
 	func setCameraConstraints() {
 		guard let camera = camera else { return }
@@ -217,4 +250,23 @@ extension GameScene: AVAudioPlayerDelegate {
 	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
 		playBackgroundMusic()
 	}
+}
+
+extension GameScene: WCSessionDelegate{
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        attack()
+    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
 }

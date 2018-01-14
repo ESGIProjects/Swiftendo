@@ -407,7 +407,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5RUJTG3BGA;
+				DEVELOPMENT_TEAM = PG324D5455;
 				IBSC_MODULE = Swiftendo_AW_Extension;
 				INFOPLIST_FILE = Swiftendo_AW/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHKIT_BUNDLE_ID}";
@@ -426,7 +426,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5RUJTG3BGA;
+				DEVELOPMENT_TEAM = PG324D5455;
 				IBSC_MODULE = Swiftendo_AW_Extension;
 				INFOPLIST_FILE = Swiftendo_AW/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHKIT_BUNDLE_ID}";
@@ -445,7 +445,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5RUJTG3BGA;
+				DEVELOPMENT_TEAM = PG324D5455;
 				INFOPLIST_FILE = "Swiftendo_AW Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHEXTENSION_BUNDLE_ID}";
@@ -463,7 +463,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5RUJTG3BGA;
+				DEVELOPMENT_TEAM = PG324D5455;
 				INFOPLIST_FILE = "Swiftendo_AW Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHEXTENSION_BUNDLE_ID}";
@@ -590,7 +590,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5RUJTG3BGA;
+				DEVELOPMENT_TEAM = PG324D5455;
 				INFOPLIST_FILE = Swiftendo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -608,7 +608,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5RUJTG3BGA;
+				DEVELOPMENT_TEAM = PG324D5455;
 				INFOPLIST_FILE = Swiftendo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
