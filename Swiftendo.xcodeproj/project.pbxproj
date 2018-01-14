@@ -22,9 +22,14 @@
 		AED416FA1FC3265400ADAAB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AED416F81FC3265400ADAAB9 /* Main.storyboard */; };
 		AED416FC1FC3265400ADAAB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AED416FB1FC3265400ADAAB9 /* Assets.xcassets */; };
 		AED416FF1FC3265400ADAAB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AED416FD1FC3265400ADAAB9 /* LaunchScreen.storyboard */; };
-		D7117EF11FD69F7F00E082E3 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */; };
+		D7117EF11FD69F7F00E082E3 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7117EF01FD69F7F00E082E3 /* Button.swift */; };
 		D719E3131FE3DC3E002D6ADF /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D719E3121FE3DC3E002D6ADF /* GameScene.sks */; };
+		D758B3EE200B727A009D5F37 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D758B3ED200B727A009D5F37 /* Direction.swift */; };
+		D758B3F0200B72E0009D5F37 /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D758B3EF200B72E0009D5F37 /* ButtonType.swift */; };
+		D76CB5FF200A550700C6557E /* SKNode+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76CB5FE200A550700C6557E /* SKNode+Action.swift */; };
+		D76CB602200AA6A600C6557E /* SKTileMapNode+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76CB601200AA6A600C6557E /* SKTileMapNode+Path.swift */; };
 		D798DCF52004025200B12290 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D798DCF42004025200B12290 /* Player.swift */; };
+		D7F12FE1200813790010EF62 /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F12FE0200813790010EF62 /* Monster.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,10 +92,15 @@
 		AED416FB1FC3265400ADAAB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AED416FE1FC3265400ADAAB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AED417001FC3265400ADAAB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
+		D7117EF01FD69F7F00E082E3 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		D719E3121FE3DC3E002D6ADF /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		D758B3ED200B727A009D5F37 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		D758B3EF200B72E0009D5F37 /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
+		D76CB5FE200A550700C6557E /* SKNode+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKNode+Action.swift"; sourceTree = "<group>"; };
+		D76CB601200AA6A600C6557E /* SKTileMapNode+Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKTileMapNode+Path.swift"; sourceTree = "<group>"; };
 		D783F8DF200648EB00C3D12E /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		D798DCF42004025200B12290 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		D7F12FE0200813790010EF62 /* Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,43 +164,64 @@
 		AED416ED1FC3265400ADAAB9 /* Swiftendo */ = {
 			isa = PBXGroup;
 			children = (
-				AE8393481FC395B200B75CA2 /* Sounds */,
-				AED416EE1FC3265400ADAAB9 /* AppDelegate.swift */,
-				AED416F41FC3265400ADAAB9 /* GameScene.swift */,
-				D7CC36C220054FA90016FF21 /* SpriteKit */,
-				D7CC36C120054F9F0016FF21 /* Controllers */,
-				D7CC36C020054F970016FF21 /* Models */,
+				D7CC36C120054F9F0016FF21 /* Classes */,
+				D758B3EC200B726B009D5F37 /* Enums */,
 				D7CC36C320054FC70016FF21 /* Interface */,
+				D7CC36C220054FA90016FF21 /* SpriteKit files */,
 				AED416FB1FC3265400ADAAB9 /* Assets.xcassets */,
+				AE8393481FC395B200B75CA2 /* Sounds */,
+				D7CC36C020054F970016FF21 /* Models */,
 				AED417001FC3265400ADAAB9 /* Info.plist */,
+				D76CB600200A765E00C6557E /* Extensions */,
 			);
 			path = Swiftendo;
+			sourceTree = "<group>";
+		};
+		D758B3EC200B726B009D5F37 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				D758B3ED200B727A009D5F37 /* Direction.swift */,
+				D758B3EF200B72E0009D5F37 /* ButtonType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		D76CB600200A765E00C6557E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D76CB5FE200A550700C6557E /* SKNode+Action.swift */,
+				D76CB601200AA6A600C6557E /* SKTileMapNode+Path.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D7CC36C020054F970016FF21 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D7117EF01FD69F7F00E082E3 /* Button.swift */,
 				D798DCF42004025200B12290 /* Player.swift */,
-				D7117EF01FD69F7F00E082E3 /* ButtonNode.swift */,
+				D7F12FE0200813790010EF62 /* Monster.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		D7CC36C120054F9F0016FF21 /* Controllers */ = {
+		D7CC36C120054F9F0016FF21 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AED416EE1FC3265400ADAAB9 /* AppDelegate.swift */,
+				AED416F41FC3265400ADAAB9 /* GameScene.swift */,
 				AED416F61FC3265400ADAAB9 /* GameViewController.swift */,
 			);
-			path = Controllers;
+			path = Classes;
 			sourceTree = "<group>";
 		};
-		D7CC36C220054FA90016FF21 /* SpriteKit */ = {
+		D7CC36C220054FA90016FF21 /* SpriteKit files */ = {
 			isa = PBXGroup;
 			children = (
 				D719E3121FE3DC3E002D6ADF /* GameScene.sks */,
 				AE83934A1FC49C9800B75CA2 /* MyTileSet.sks */,
 			);
-			path = SpriteKit;
+			path = "SpriteKit files";
 			sourceTree = "<group>";
 		};
 		D7CC36C320054FC70016FF21 /* Interface */ = {
@@ -350,10 +381,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AED416F51FC3265400ADAAB9 /* GameScene.swift in Sources */,
+				D7F12FE1200813790010EF62 /* Monster.swift in Sources */,
 				AED416F71FC3265400ADAAB9 /* GameViewController.swift in Sources */,
 				AED416EF1FC3265400ADAAB9 /* AppDelegate.swift in Sources */,
 				D798DCF52004025200B12290 /* Player.swift in Sources */,
-				D7117EF11FD69F7F00E082E3 /* ButtonNode.swift in Sources */,
+				D758B3F0200B72E0009D5F37 /* ButtonType.swift in Sources */,
+				D76CB5FF200A550700C6557E /* SKNode+Action.swift in Sources */,
+				D76CB602200AA6A600C6557E /* SKTileMapNode+Path.swift in Sources */,
+				D7117EF11FD69F7F00E082E3 /* Button.swift in Sources */,
+				D758B3EE200B727A009D5F37 /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +443,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PG324D5455;
+				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				IBSC_MODULE = Swiftendo_AW_Extension;
 				INFOPLIST_FILE = Swiftendo_AW/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHKIT_BUNDLE_ID}";
@@ -426,7 +462,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PG324D5455;
+				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				IBSC_MODULE = Swiftendo_AW_Extension;
 				INFOPLIST_FILE = Swiftendo_AW/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHKIT_BUNDLE_ID}";
@@ -445,7 +481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PG324D5455;
+				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				INFOPLIST_FILE = "Swiftendo_AW Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHEXTENSION_BUNDLE_ID}";
@@ -463,7 +499,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PG324D5455;
+				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				INFOPLIST_FILE = "Swiftendo_AW Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "${WATCHEXTENSION_BUNDLE_ID}";
@@ -590,7 +626,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PG324D5455;
+				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				INFOPLIST_FILE = Swiftendo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -608,7 +644,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PG324D5455;
+				DEVELOPMENT_TEAM = 5RUJTG3BGA;
 				INFOPLIST_FILE = Swiftendo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

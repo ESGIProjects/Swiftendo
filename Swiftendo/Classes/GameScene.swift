@@ -8,38 +8,28 @@
 
 import SpriteKit
 import GameplayKit
+
 import AVFoundation
 import WatchConnectivity
 
 class GameScene: SKScene {
-    
+	
+	// MARK: - SpriteKit properties
+	
 	var cameraNode: SKCameraNode!
+	var tileMapNode: SKTileMapNode!
+	
+	// MARK: - Touch properties
+	
 	var lastTouch: CGPoint = .zero
 	var originalTouch: CGPoint = .zero
 	
-    //init parameters for music
+	// MARK: - Music properties
+	
     var backgroundMusic: AVAudioPlayer?
     var musicNumber = 0
 	
-    //buttons
-	var upButton: ButtonNode!
-    var downButton: ButtonNode!
-    var leftButton: ButtonNode!
-    var rightButton: ButtonNode!
-    var startButton: ButtonNode!
-    var actionButton: ButtonNode!
-	
-	var player: Player!
-    
-    var shot: SKSpriteNode!
-    let upShot = SKAction.sequence([SKAction.moveBy(x: 0, y: 256, duration: 0.4),SKAction.removeFromParent()])
-    let downShot = SKAction.sequence([SKAction.moveBy(x: 0, y: -256, duration: 0.4),SKAction.removeFromParent()])
-    let leftShot = SKAction.sequence([SKAction.moveBy(x: -256, y: 0, duration: 0.4),SKAction.removeFromParent()])
-    let rightShot = SKAction.sequence([SKAction.moveBy(x: 256, y: 0, duration: 0.4),SKAction.removeFromParent()])
-    
-    var session: WCSession?
-    
-    let musicList = [
+	let musicList = [
 		"Sounds/Hyrule_Castle_SNES",
 		"Sounds/Hyrule_Field_SNES",
 		"Sounds/Dark_World_SNES",
@@ -48,61 +38,76 @@ class GameScene: SKScene {
 		"Sounds/Gerudo_Valley_N64",
 		"Sounds/Tal_Tal_Mountain_GB"
 	]
+
+	var shot: SKSpriteNode!
+    let upShot = SKAction.sequence([SKAction.moveBy(x: 0, y: 256, duration: 0.4),SKAction.removeFromParent()])
+    let downShot = SKAction.sequence([SKAction.moveBy(x: 0, y: -256, duration: 0.4),SKAction.removeFromParent()])
+    let leftShot = SKAction.sequence([SKAction.moveBy(x: -256, y: 0, duration: 0.4),SKAction.removeFromParent()])
+    let rightShot = SKAction.sequence([SKAction.moveBy(x: 256, y: 0, duration: 0.4),SKAction.removeFromParent()])
+    
+    var session: WCSession?
+	
+	// MARK: - Button properties
+	
+	var upButton: Button!
+    var downButton: Button!
+    var leftButton: Button!
+    var rightButton: Button!
+    var startButton: Button!
+    var actionButton: Button!
+	
+	// MARK: - Entity properties
+	
+	var player: Player!
+	var monsters = [Monster]()
+	
+	// MARK: - SKScene
     
     override func didMove(to view: SKView) {
+		// Set properties
 		cameraNode = camera!
+		tileMapNode = childNode(withName: "Tile Map Node") as! SKTileMapNode
+
+		// Start watch session
+		startSession()
 		
-        startSession()
-        playBackgroundMusic()
+		// Set player property
+		player = spawnPlayer()
+		addChild(player.node)
+		
+		// Initialize music & buttons
+        //playBackgroundMusic()
         initButtons()
 		
-		// Add the player into the map
-		player = Player()
-		player.position = CGPoint(x: 0, y: 0)
-		addChild(player)
-		
-		let sq = SKShapeNode(rectOf: CGSize(width: 16, height: 16))
-		sq.position = CGPoint(x: 0, y: 0)
-		addChild(sq)
-		
+		// Constraints the camera
 		setCameraConstraints()
 		
+		// Start enemy spawn 5 seconds later
 		Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [unowned self] _ in
-			self.launchMonsterGeneration(timeInterval: 3)
+			self.launchMonsterGeneration(timeInterval: 10)
 		}
     }
-	
-	func launchMonsterGeneration(timeInterval: TimeInterval) {
-		Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { [unowned self] _ in
-	
-			print("Launch monster generation called with timeInterval of \(timeInterval)")
-			
-			// create monster
-			self.launchMonsterGeneration(timeInterval: timeInterval)
-		}
-	}
-	
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		guard let touch = touches.first else { return }
-		lastTouch = touch.location(in: view)
-		originalTouch = lastTouch
-	}
-	
-	override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-		guard let touch = touches.first else { return }
-		let touchLocation = touch.location(in: view)
-		
-		let newX = cameraNode.position.x + (lastTouch.x - touchLocation.x)
-		let newY = cameraNode.position.y + (touchLocation.y - lastTouch.y)
-		cameraNode.position = CGPoint(x: newX, y: newY)
-		
-		lastTouch = touchLocation
-	}
 	
 	override func update(_ currentTime: TimeInterval) {
 		// Called before each frame is rendered
 	}
-    
+	
+	func launchMonsterGeneration(timeInterval: TimeInterval) {
+		Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { [unowned self] _ in
+	
+			let monster = self.spawnMonster()
+			self.monsters.append(monster)
+			self.addChild(monster.node)
+			
+			monster.followPlayer(self.player)
+			
+			// create monster
+			self.launchMonsterGeneration(timeInterval: max(timeInterval-1, 3))
+		}
+	}
+	
+	// MARK: - Helpers
+	
     func playBackgroundMusic() {
 		let selectedMusic = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: musicList).first as! String
 		
@@ -115,8 +120,7 @@ class GameScene: SKScene {
     }
     
     func initButtons() {
-        
-		upButton = ButtonNode(button: .up)
+		upButton = Button(type: .up)
 		upButton.action = {[unowned self] in self.touchButton(.up) }
 		upButton.anchorPoint = CGPoint(x: 0,y: 0)
         upButton.position = CGPoint(x: frame.minX + 75, y: frame.minY + 85)
@@ -125,7 +129,7 @@ class GameScene: SKScene {
 		upButton.alpha = 0.5
         cameraNode.addChild(upButton)
 		
-		downButton = ButtonNode(button: .down)
+		downButton = Button(type: .down)
 		downButton.action = {[unowned self] in self.touchButton(.down) }
         downButton.anchorPoint = CGPoint(x: 0,y: 0)
         downButton.position = CGPoint(x: frame.minX + 75, y: frame.minY + 25)
@@ -134,7 +138,7 @@ class GameScene: SKScene {
 		downButton.alpha = 0.5
         cameraNode.addChild(downButton)
 		
-		leftButton = ButtonNode(button: .left)
+		leftButton = Button(type: .left)
 		leftButton.action = {[unowned self] in self.touchButton(.left) }
         leftButton.anchorPoint = CGPoint(x: 0,y: 0)
         leftButton.position = CGPoint(x: frame.minX + 40, y: frame.minY + 57.5)
@@ -143,7 +147,7 @@ class GameScene: SKScene {
 		leftButton.alpha = 0.5
         cameraNode.addChild(leftButton)
 		
-		rightButton = ButtonNode(button: .right)
+		rightButton = Button(type: .right)
 		rightButton.action = {[unowned self] in self.touchButton(.right) }
         rightButton.anchorPoint = CGPoint(x: 0,y: 0)
         rightButton.position = CGPoint(x: frame.minX + 105, y: frame.minY + 57.5)
@@ -152,7 +156,7 @@ class GameScene: SKScene {
 		rightButton.alpha = 0.5
         cameraNode.addChild(rightButton)
 		
-		startButton = ButtonNode(button: .start)
+		startButton = Button(type: .start)
 		startButton.action = {[unowned self] in self.touchButton(.start) }
         startButton.position = CGPoint(x: 0,y: frame.minY + 30)
         startButton.xScale = 0.6
@@ -161,7 +165,7 @@ class GameScene: SKScene {
         cameraNode.addChild(startButton)
 
         if !(session?.isReachable)! || !(session?.isPaired)!{
-            actionButton = ButtonNode(button: .action)
+            actionButton = Button(type: .action)
             actionButton.action = {[unowned self] in self.touchButton(.action) }
             actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
             actionButton.xScale = 0.6
@@ -179,7 +183,7 @@ class GameScene: SKScene {
         }
     }
 	
-	func touchButton(_ button: Button) {
+	func touchButton(_ button: ButtonType) {
 		switch button {
 		case .up:
 			player.moveTo(.up)
@@ -195,9 +199,9 @@ class GameScene: SKScene {
             attack()
 		}
 		
-		print("Player position - x: \(player.position.x) y: \(player.position.y)")
-		print("Camera position - x: \(cameraNode.position.x) y: \(cameraNode.position.y)")
-		print("")
+		for monster in monsters {
+			monster.followPlayer(player)
+		}
 	}
     
     func attack(){
@@ -217,7 +221,7 @@ class GameScene: SKScene {
         case .right:
             shot = SKSpriteNode(imageNamed: "link-right")
             cameraNode.addChild(shot)
-            shot.run(rightShot)
+            shot.run(rightShot) 
         }
     }
 	
@@ -225,7 +229,7 @@ class GameScene: SKScene {
 		guard let camera = camera else { return }
 		
 		let zeroRange = SKRange(constantValue: 0.0)
-		let playerLocationConstraint = SKConstraint.distance(zeroRange, to: player)
+		let playerLocationConstraint = SKConstraint.distance(zeroRange, to: player.node)
 		
 		let scaledSize = CGSize(width: size.width * camera.xScale, height: size.height * camera.yScale)
 		
@@ -244,8 +248,29 @@ class GameScene: SKScene {
 		
 		camera.constraints = [playerLocationConstraint, levelEdgeConstraint]
 	}
+	
+	// MARK: - Create new entity
+	
+	func spawnPlayer() -> Player{
+		let player = Player()
+		
+		player.node.position = CGPoint(x: 0, y: 0)
+		player.node.zPosition = 0
+		
+		return player
+	}
+	
+	func spawnMonster() -> Monster {
+		let monster = Monster()
+		
+		monster.node.position = CGPoint(x: 0, y: 0)
+		monster.node.zPosition = 0
+		
+		return monster
+	}
 }
 
+// MARK: - AVAudioPlayerDelegate
 extension GameScene: AVAudioPlayerDelegate {
 	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
 		playBackgroundMusic()
