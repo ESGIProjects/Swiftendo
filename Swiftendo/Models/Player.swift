@@ -30,7 +30,7 @@ class Player {
 		node.name = "player"
 		node.zPosition = 1
 		
-		node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
+		node.physicsBody = SKPhysicsBody(texture: node.texture!, size: node.size)
 		node.physicsBody?.categoryBitMask = CollisionTypes.player.rawValue
 		node.physicsBody?.contactTestBitMask = CollisionTypes.monster.rawValue
 		node.physicsBody?.collisionBitMask = 0
@@ -91,6 +91,7 @@ class Player {
 			}
 			
 			node.run(action)
+			scene.setHearts()
 		}
 	}
 }

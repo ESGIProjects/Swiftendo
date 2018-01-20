@@ -18,13 +18,13 @@ class Monster {
 	
 	init() {
 		health = 1
-		speed = 50
+		speed = 0
 		
 		node = SKSpriteNode(imageNamed: "metroid")
 		node.name = "monster"
 		node.zPosition = 1
 		
-		node.physicsBody = SKPhysicsBody(texture: node.texture!, size: node.texture!.size())
+		node.physicsBody = SKPhysicsBody(texture: node.texture!, size: node.size)
 		node.physicsBody?.allowsRotation = false
 		
 		node.physicsBody?.categoryBitMask = CollisionTypes.monster.rawValue
