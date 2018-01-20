@@ -69,7 +69,8 @@ class Monster {
 			action = SKAction.sequence([blinkSequence, SKAction.fadeIn(withDuration: 0.1)])
 		} else {
 			node.removeAction(forKey: "follow")
-			
+			node.physicsBody?.categoryBitMask = 0
+			node.physicsBody?.contactTestBitMask = 0
 			action = SKAction.sequence([blinkSequence, SKAction.removeFromParent()])
 		}
 		
