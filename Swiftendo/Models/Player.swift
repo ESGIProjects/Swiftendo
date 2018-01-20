@@ -101,4 +101,12 @@ class Player {
 			scene.setHearts()
 		}
 	}
+	
+	func reset(at position: CGPoint) {
+		node.position = position
+		node.texture = SKTexture(imageNamed: "link-down")
+		node.alpha = 1
+		health = 3
+		direction = .down
+	}
 }

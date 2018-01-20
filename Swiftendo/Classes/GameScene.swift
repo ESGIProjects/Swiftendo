@@ -14,6 +14,8 @@ import WatchConnectivity
 
 class GameScene: SKScene {
 	
+	var timer: Timer!
+	
 	// MARK: - SpriteKit properties
 	var cameraNode: SKCameraNode!
 	var tileMapNode: SKTileMapNode!
@@ -43,13 +45,6 @@ class GameScene: SKScene {
 	// MARK: - Button properties
 	
 	var buttons = [String: Button]()
-	/*
-	var upButton: Button!
-    var downButton: Button!
-    var leftButton: Button!
-    var rightButton: Button!
-    var startButton: Button!
-    var actionButton: Button!*/
 	
 	// MARK: - Entity properties
 	
@@ -64,6 +59,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
 		// Set properties
 		cameraNode = camera!
+
 		tileMapNode = childNode(withName: "Tile Map Node") as! SKTileMapNode
 		physicsWorld.contactDelegate = self
 
@@ -83,15 +79,11 @@ class GameScene: SKScene {
 		setCameraConstraints()
 		
 		// Start enemy spawn 5 seconds later
-		self.launchMonsterGeneration(timeInterval: 5)
+		timer = launchMonsterGeneration(timeInterval: 5)
     }
 	
-	override func update(_ currentTime: TimeInterval) {
-		// Called before each frame is rendered
-	}
-	
-	func launchMonsterGeneration(timeInterval: TimeInterval) {
-		Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { [unowned self] _ in
+	func launchMonsterGeneration(timeInterval: TimeInterval) -> Timer {
+		return Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { [unowned self] _ in
 	
 			let monster = self.spawnMonster()
 			self.monsters.append(monster)
@@ -100,7 +92,7 @@ class GameScene: SKScene {
 			monster.followPlayer(self.player)
 			
 			// create monster
-			self.launchMonsterGeneration(timeInterval: max(timeInterval-1, 3))
+			//self.launchMonsterGeneration(timeInterval: 4)
 		}
 	}
 	
@@ -154,8 +146,6 @@ class GameScene: SKScene {
 			centerHeart.name = "heart"
 			centerHeart.position = CGPoint(x: 0, y: frame.maxY - yOffset)
 			cameraNode.addChild(centerHeart)
-			
-			print("heart width", centerHeart.size.width)
 			
 			// Left heart
 			let leftHeart = SKSpriteNode(imageNamed: "heart")
@@ -341,42 +331,65 @@ class GameScene: SKScene {
 	func gameOver() {
 		print("Game over!")
 		
-		/*
+		timer.invalidate()
+		
 		for monster in monsters {
-		monster.node.removeAction(forKey: "follow")
+			monster.node.removeAction(forKey: "follow")
 		}
-		*/
 		
 		// Overlay
-		let overlay = SKShapeNode(rectOf: size)
+		let overlay = SKShapeNode(rectOf: frame.size)
+		overlay.name = "overlay"
 		overlay.fillColor = UIColor.black.withAlphaComponent(0.5)
 		overlay.position = .zero
 		overlay.zPosition = 1 // on top of buttons
 		
 		// Add game over on overlay
-		let gameOverText = SKLabelNode()
-		gameOverText.text = "GAME OVER !"
+		let gameOverText = SKLabelNode(fontNamed: "Chalkduster")
+		
+		let attributedText = NSAttributedString(string: "GAME OVER", attributes: [
+			.font: UIFont.boldSystemFont(ofSize: 64),
+			.foregroundColor: UIColor.white
+		])
+		
+		gameOverText.attributedText = attributedText
 		gameOverText.fontColor = .white
-		gameOverText.position = .zero
+		gameOverText.position = CGPoint(x: 0, y: 50)
 		overlay.addChild(gameOverText)
+		
+		// Add retry button
+		let retry = RetryButton(scene: self)
+		retry.position = CGPoint(x: 0, y: -50)
+		retry.xScale = 0.5
+		retry.yScale = 0.5
+		overlay.addChild(retry)
 		
 		// Add overlay
 		cameraNode.addChild(overlay)
-		
 	}
 	
 	func restart() {
 		
-	}
-	
-	func pause() {
+		// Remove monsters
+		for monster in monsters {
+			monster.node.removeFromParent()
+		}
+		monsters.removeAll()
 		
-	}
-	
-	func resume() {
+		// Reset the player position
+		player.reset(at: .zero)
 		
+		// Display health
+		setHearts()
+		
+		// Delete overlay
+		if let overlay = cameraNode.childNode(withName: "overlay") {
+			overlay.removeFromParent()
+		}
+		
+		// Resume timer
+		timer = launchMonsterGeneration(timeInterval: 5)
 	}
-	
 }
 
 // MARK: - AVAudioPlayerDelegate
@@ -417,7 +430,7 @@ extension GameScene: WCSessionDelegate{
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
+
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
