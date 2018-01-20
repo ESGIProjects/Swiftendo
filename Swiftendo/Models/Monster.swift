@@ -20,11 +20,18 @@ class Monster {
 		health = 1
 		speed = 45
 		
-		node = SKSpriteNode(imageNamed: "metroid")
+		if GKRandomSource.sharedRandom().nextBool() {
+			node = SKSpriteNode(imageNamed: "metroid")
+			node.physicsBody = SKPhysicsBody(texture: node.texture!, size: node.size)
+		} else {
+			node = SKSpriteNode(imageNamed: "boo")
+			// weird bug with boo texture
+			node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.height/2, center: CGPoint(x: 0.5, y: 0.5))
+		}
+		
 		node.name = "monster"
 		node.zPosition = 1
 		
-		node.physicsBody = SKPhysicsBody(texture: node.texture!, size: node.size)
 		node.physicsBody?.allowsRotation = false
 		
 		node.physicsBody?.categoryBitMask = CollisionTypes.monster.rawValue
