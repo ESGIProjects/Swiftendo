@@ -224,24 +224,13 @@ class GameScene: SKScene {
 		buttons["action"] = actionButton
 		
 		displayActionButton()
-
-//        if !(session?.isReachable)! || !(session?.isPaired)!{
-//            let actionButton = Button(type: .action)
-//            actionButton.action = {[unowned self] in self.touchButton(.action) }
-//            actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
-//            actionButton.xScale = 0.6
-//            actionButton.yScale = 0.6
-//            actionButton.alpha = 0.5
-//			buttons["action"] = actionButton
-//            cameraNode.addChild(actionButton)
-//        }
     }
     
     func startSession() {
         if WCSession.isSupported() {
             session = WCSession.default
-            session!.delegate = self
-            session!.activate()
+            session?.delegate = self
+            session?.activate()
         }
     }
 	
@@ -404,10 +393,14 @@ class GameScene: SKScene {
 	func displayActionButton() {
 		guard let actionButton = buttons["action"] else { return }
 		
-		if !session!.isReachable {
-			cameraNode.addChild(actionButton)
+		if let session = session {
+			if !session.isReachable {
+				cameraNode.addChild(actionButton)
+			}  else {
+				actionButton.removeFromParent()
+			}
 		} else {
-			actionButton.removeFromParent()
+			cameraNode.addChild(actionButton)
 		}
 	}
 }
