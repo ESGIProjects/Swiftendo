@@ -37,35 +37,42 @@ class Player {
 	}
 	
 	func moveTo(_ direction: Direction) {
-		self.direction = direction
-		let changeDirection = SKAction.setTexture(SKTexture(imageNamed:"link-\(direction.rawValue)"))
 		
-		let duration = 16 / speed
-		var move: SKAction!
-		
-		switch direction {
-		case .up:
-			move = SKAction.moveBy(x: 0, y: 16, duration: duration)
-		case .down:
-			move = SKAction.moveBy(x: 0, y: -16, duration: duration)
-		case .left:
-			move = SKAction.moveBy(x: -16, y: 0, duration: duration)
-		case .right:
-			move = SKAction.moveBy(x: 16, y: 0, duration: duration)
-		}
-		
-		node.run(SKAction.group([changeDirection, move])) { [unowned self] in
-			print("(After move) Player position - x: \(self.node.position.x) y: \(self.node.position.y)")
+		if health > 0 {
+			
+			self.direction = direction
+			let changeDirection = SKAction.setTexture(SKTexture(imageNamed:"link-\(direction.rawValue)"))
+			
+			let duration = 16 / speed
+			var move: SKAction!
+			
+			switch direction {
+			case .up:
+				move = SKAction.moveBy(x: 0, y: 16, duration: duration)
+			case .down:
+				move = SKAction.moveBy(x: 0, y: -16, duration: duration)
+			case .left:
+				move = SKAction.moveBy(x: -16, y: 0, duration: duration)
+			case .right:
+				move = SKAction.moveBy(x: 16, y: 0, duration: duration)
+			}
+			
+			node.run(SKAction.group([changeDirection, move])) { [unowned self] in
+				print("(After move) Player position - x: \(self.node.position.x) y: \(self.node.position.y)")
+			}
 		}
 	}
 	
 	func fire() {
-		guard let scene = node.parent else { return }
-		
-		let pokeball = Pokeball(at: node.position)
-		scene.addChild(pokeball.node)
-		
-		pokeball.fire(in: direction)
+		if health > 0 {
+			
+			guard let scene = node.parent else { return }
+			
+			let pokeball = Pokeball(at: node.position)
+			scene.addChild(pokeball.node)
+			
+			pokeball.fire(in: direction)
+		}
 	}
 	
 	func takeDamage() {
@@ -80,7 +87,7 @@ class Player {
 				SKAction.fadeAlpha(to: 0.3, duration: 0.5),
 				SKAction.fadeIn(withDuration: 0.5),
 				SKAction.fadeAlpha(to: 0.3, duration: 0.5)
-			])
+				])
 			
 			var action: SKAction!
 			
