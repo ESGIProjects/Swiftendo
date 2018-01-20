@@ -71,6 +71,7 @@ class GameScene: SKScene {
 		// Initialize music & buttons
         playBackgroundMusic()
         initButtons()
+		setHearts()
 		
 		// Constraints the camera
 		setCameraConstraints()
@@ -109,7 +110,65 @@ class GameScene: SKScene {
 			backgroundMusic?.play()
 		}
     }
-    
+	
+	func setHearts() {
+		while let node = cameraNode.childNode(withName: "heart") {
+			node.removeFromParent()
+		}
+		
+		let yOffset = 5.0
+		let spacing = 4.0
+		
+		switch player.health {
+		case 1:
+			// Centered heart
+			let centerHeart = SKSpriteNode(imageNamed: "heart")
+			centerHeart.anchorPoint = CGPoint(x: 0.5, y: 1)
+			centerHeart.name = "heart"
+			centerHeart.position = CGPoint(x: 0, y: frame.maxY - yOffset)
+			cameraNode.addChild(centerHeart)
+		case 2:
+			// Left heart
+			let leftHeart = SKSpriteNode(imageNamed: "heart")
+			leftHeart.anchorPoint = CGPoint(x: 0.5, y: 1)
+			leftHeart.name = "heart"
+			leftHeart.position = CGPoint(x: 0 - (spacing + leftHeart.size.width)/2, y: frame.maxY - yOffset)
+			cameraNode.addChild(leftHeart)
+			
+			// Right heart
+			let rightHeart = SKSpriteNode(imageNamed: "heart")
+			rightHeart.anchorPoint = CGPoint(x: 0.5, y: 1)
+			rightHeart.name = "heart"
+			rightHeart.position = CGPoint(x: 0 + (spacing + rightHeart.size.width)/2, y: frame.maxY - yOffset)
+			cameraNode.addChild(rightHeart)
+		case 3:
+			// Centered heart
+			let centerHeart = SKSpriteNode(imageNamed: "heart")
+			centerHeart.anchorPoint = CGPoint(x: 0.5, y: 1)
+			centerHeart.name = "heart"
+			centerHeart.position = CGPoint(x: 0, y: frame.maxY - yOffset)
+			cameraNode.addChild(centerHeart)
+			
+			print("heart width", centerHeart.size.width)
+			
+			// Left heart
+			let leftHeart = SKSpriteNode(imageNamed: "heart")
+			leftHeart.anchorPoint = CGPoint(x: 0.5, y: 1)
+			leftHeart.name = "heart"
+			leftHeart.position = CGPoint(x: 0 - spacing - leftHeart.size.width, y: frame.maxY - yOffset)
+			cameraNode.addChild(leftHeart)
+			
+			// Right heart
+			let rightHeart = SKSpriteNode(imageNamed: "heart")
+			rightHeart.anchorPoint = CGPoint(x: 0.5, y: 1)
+			rightHeart.name = "heart"
+			rightHeart.position = CGPoint(x: 0 + spacing + rightHeart.size.width, y: frame.maxY - yOffset)
+			cameraNode.addChild(rightHeart)
+		default:
+			break
+		}
+	}
+	
     func initButtons() {
 		let upButton = Button(type: .up)
 		upButton.action = {[unowned self] in self.touchButton(.up) }
