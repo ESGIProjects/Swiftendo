@@ -15,7 +15,6 @@ import WatchConnectivity
 class GameScene: SKScene {
 	
 	// MARK: - SpriteKit properties
-	
 	var cameraNode: SKCameraNode!
 	var tileMapNode: SKTileMapNode!
 	
@@ -31,7 +30,14 @@ class GameScene: SKScene {
 		"Sounds/Hyrule_Field_Wii",
 		"Sounds/Lost_Woods_N64",
 		"Sounds/Gerudo_Valley_N64",
-		"Sounds/Tal_Tal_Mountain_GB"
+		"Sounds/Tal_Tal_Mountain_GB",
+        "Sounds/Lavanville",
+        "Sounds/Mario_Overworld",
+        "Sounds/Green_Greens",
+        "Sounds/Celadopole",
+        "Sounds/Delfino_Plaza",
+        "Sounds/Mansion",
+        "Sounds/Metroid_Main"
 	]
 	
 	// MARK: - Button properties
@@ -296,9 +302,12 @@ class GameScene: SKScene {
 	
 	func spawnMonster() -> Monster {
 		let monster = Monster()
-		
-		monster.node.position = CGPoint(x: 0, y: 0)
-		
+        
+        let xPosition = (CGFloat(tileMapNode.numberOfColumns) * tileMapNode.tileSize.width)
+        let yPosition = (CGFloat(tileMapNode.numberOfRows) * tileMapNode.tileSize.width)
+        
+        monster.node.position = CGPoint(x: CGFloat(arc4random_uniform(UInt32(xPosition))) - (xPosition / 2), y: CGFloat(arc4random_uniform(UInt32(yPosition))) - (yPosition / 2))
+        
 		return monster
 	}
 	
