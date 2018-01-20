@@ -214,24 +214,34 @@ class GameScene: SKScene {
 		startButton.alpha = 0.5
 		buttons["start"] = startButton
         cameraNode.addChild(startButton)
+		
+		let actionButton = Button(type: .action)
+		actionButton.action = {[unowned self] in self.touchButton(.action) }
+		actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
+		actionButton.xScale = 0.6
+		actionButton.yScale = 0.6
+		actionButton.alpha = 0.5
+		buttons["action"] = actionButton
+		
+		displayActionButton()
 
-        if !(session?.isReachable)! || !(session?.isPaired)!{
-            let actionButton = Button(type: .action)
-            actionButton.action = {[unowned self] in self.touchButton(.action) }
-            actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
-            actionButton.xScale = 0.6
-            actionButton.yScale = 0.6
-            actionButton.alpha = 0.5
-			buttons["action"] = actionButton
-            cameraNode.addChild(actionButton)
-        }
+//        if !(session?.isReachable)! || !(session?.isPaired)!{
+//            let actionButton = Button(type: .action)
+//            actionButton.action = {[unowned self] in self.touchButton(.action) }
+//            actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
+//            actionButton.xScale = 0.6
+//            actionButton.yScale = 0.6
+//            actionButton.alpha = 0.5
+//			buttons["action"] = actionButton
+//            cameraNode.addChild(actionButton)
+//        }
     }
     
-    func startSession(){
-        if WCSession.isSupported(){
+    func startSession() {
+        if WCSession.isSupported() {
             session = WCSession.default
-            session?.delegate = self
-            session?.activate()
+            session!.delegate = self
+            session!.activate()
         }
     }
 	
@@ -390,6 +400,16 @@ class GameScene: SKScene {
 		// Resume timer
 		timer = launchMonsterGeneration(timeInterval: 5)
 	}
+	
+	func displayActionButton() {
+		guard let actionButton = buttons["action"] else { return }
+		
+		if !session!.isReachable {
+			cameraNode.addChild(actionButton)
+		} else {
+			actionButton.removeFromParent()
+		}
+	}
 }
 
 // MARK: - AVAudioPlayerDelegate
@@ -423,14 +443,14 @@ extension GameScene: SKPhysicsContactDelegate {
 }
 
 // MARK: - WCSessionDelegate
-extension GameScene: WCSessionDelegate{
+extension GameScene: WCSessionDelegate {
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         touchButton(.action)
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-
+		
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
@@ -440,4 +460,8 @@ extension GameScene: WCSessionDelegate{
     func sessionDidDeactivate(_ session: WCSession) {
         
     }
+	
+	func sessionReachabilityDidChange(_ session: WCSession) {
+		displayActionButton()
+	}
 }
