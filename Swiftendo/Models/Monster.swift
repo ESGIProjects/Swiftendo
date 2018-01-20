@@ -18,7 +18,7 @@ class Monster {
 	
 	init() {
 		health = 1
-		speed = 50
+		speed = 0
 		
 		node = SKSpriteNode(imageNamed: "metroid")
 		node.name = "monster"
