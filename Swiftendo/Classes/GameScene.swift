@@ -334,22 +334,26 @@ class GameScene: SKScene {
 		
 		/*
 		for monster in monsters {
-			monster.node.removeAction(forKey: "follow")
+		monster.node.removeAction(forKey: "follow")
 		}
 		*/
 		
 		// Overlay
-		let overlay = SKShapeNode(rectOf: self.size)
+		let overlay = SKShapeNode(rectOf: size)
 		overlay.fillColor = UIColor.black.withAlphaComponent(0.5)
-		overlay.position = CGPoint(x: 0, y: 0)
+		overlay.position = .zero
 		overlay.zPosition = 1 // on top of buttons
 		
 		// Add game over on overlay
+		let gameOverText = SKLabelNode()
+		gameOverText.text = "GAME OVER !"
+		gameOverText.fontColor = .white
+		gameOverText.position = .zero
+		overlay.addChild(gameOverText)
 		
-
 		// Add overlay
 		cameraNode.addChild(overlay)
-
+		
 	}
 	
 	func restart() {
