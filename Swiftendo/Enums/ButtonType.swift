@@ -13,6 +13,5 @@ enum ButtonType: String {
 	case down	= "buttonDown"
 	case left	= "buttonLeft"
 	case right	= "buttonRight"
-	case start	= "buttonStart"
 	case action	= "buttonAction"
 }

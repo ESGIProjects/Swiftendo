@@ -206,15 +206,6 @@ class GameScene: SKScene {
 		buttons["right"] = rightButton
         cameraNode.addChild(rightButton)
 		
-		let startButton = Button(type: .start)
-		startButton.action = {[unowned self] in self.touchButton(.start) }
-        startButton.position = CGPoint(x: 0,y: frame.minY + 30)
-        startButton.xScale = 0.6
-        startButton.yScale = 0.6
-		startButton.alpha = 0.5
-		buttons["start"] = startButton
-        cameraNode.addChild(startButton)
-		
 		let actionButton = Button(type: .action)
 		actionButton.action = {[unowned self] in self.touchButton(.action) }
 		actionButton.position = CGPoint(x: frame.maxX - 70, y: frame.minY + 72.5)
@@ -244,8 +235,6 @@ class GameScene: SKScene {
 			player.moveTo(.left)
 		case .right:
 			player.moveTo(.right)
-		case .start:
-			print("Start button touched")
 		case .action:
             player.fire()
 		}
