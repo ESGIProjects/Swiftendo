@@ -30,22 +30,39 @@ class Pokeball {
 	}
 	
 	func fire(in direction: Direction) {
-		var action: SKAction!
-		
+		var move: SKAction!
 		let duration = Double(reach) / speed
 
+		// Move
+		
 		switch direction {
 		case .up:
-			action = SKAction.moveBy(x: 0, y: reach, duration: duration)
+			move = SKAction.moveBy(x: 0, y: reach, duration: duration)
 		case .down:
-			action = SKAction.moveBy(x: 0, y: -reach, duration: duration)
+			move = SKAction.moveBy(x: 0, y: -reach, duration: duration)
 		case .left:
-			action = SKAction.moveBy(x: -reach, y: 0, duration: duration)
+			move = SKAction.moveBy(x: -reach, y: 0, duration: duration)
 		case .right:
-			action = SKAction.moveBy(x: reach, y: 0, duration: duration)
+			move = SKAction.moveBy(x: reach, y: 0, duration: duration)
 		}
 		
-		node.run(SKAction.sequence([action, SKAction.removeFromParent()]))
+		let moveSequence = SKAction.sequence([move, SKAction.removeFromParent()])
+		
+		// Rotate
+		
+		let rotate = SKAction.repeatForever(SKAction.rotate(byAngle: 2 * .pi, duration: 0.5))
+		
+		// Sound
+		
+		let soundNode = SKAudioNode(fileNamed: "Sounds/Effects/LTTP_Arrow_Shoot.wav")
+		soundNode.autoplayLooped = false
+		node.addChild(soundNode)
+		
+		let sound = SKAction.run {
+			soundNode.run(SKAction.sequence([SKAction.play()]))//, SKAction.removeFromParent()]))
+		}
+		
+		node.run(SKAction.group([moveSequence, sound, rotate]))
 
 	}
 }

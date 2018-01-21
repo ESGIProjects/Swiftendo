@@ -26,20 +26,20 @@ class GameScene: SKScene {
     private var musicNumber = 0
 	
 	private let musicList = [
-		"Sounds/Hyrule_Castle_SNES",
-		"Sounds/Hyrule_Field_SNES",
-		"Sounds/Dark_World_SNES",
-		"Sounds/Hyrule_Field_Wii",
-		"Sounds/Lost_Woods_N64",
-		"Sounds/Gerudo_Valley_N64",
-		"Sounds/Tal_Tal_Mountain_GB",
-        "Sounds/Lavanville",
-        "Sounds/Mario_Overworld",
-        "Sounds/Green_Greens",
-        "Sounds/Celadopole",
-        "Sounds/Delfino_Plaza",
-        "Sounds/Mansion",
-        "Sounds/Metroid_Main"
+		"Sounds/Themes/Hyrule_Castle_SNES",
+		"Sounds/Themes/Hyrule_Field_SNES",
+		"Sounds/Themes/Dark_World_SNES",
+		"Sounds/Themes/Hyrule_Field_Wii",
+		"Sounds/Themes/Lost_Woods_N64",
+		"Sounds/Themes/Gerudo_Valley_N64",
+		"Sounds/Themes/Tal_Tal_Mountain_GB",
+        "Sounds/Themes/Lavanville",
+        "Sounds/Themes/Mario_Overworld",
+        "Sounds/Themes/Green_Greens",
+        "Sounds/Themes/Celadopole",
+        "Sounds/Themes/Delfino_Plaza",
+        "Sounds/Themes/Mansion",
+        "Sounds/Themes/Metroid_Main"
 	]
 	
 	// MARK: - Button properties
@@ -71,7 +71,7 @@ class GameScene: SKScene {
 		addChild(player.node)
 		
 		// Initialize music & buttons
-        playBackgroundMusic()
+        //playBackgroundMusic()
         initButtons()
 		setHearts()
 		
@@ -90,9 +90,6 @@ class GameScene: SKScene {
 			self.addChild(monster.node)
 			
 			monster.followPlayer(self.player)
-			
-			// create monster
-			//self.launchMonsterGeneration(timeInterval: 4)
 		}
 	}
 	
@@ -168,7 +165,7 @@ class GameScene: SKScene {
     private func initButtons() {
 		let upButton = Button(type: .up)
 		upButton.action = {[unowned self] in self.touchButton(.up) }
-		upButton.anchorPoint = CGPoint(x: 0,y: 0)
+		upButton.anchorPoint = .zero
         upButton.position = CGPoint(x: frame.minX + 75, y: frame.minY + 85)
         upButton.xScale = 0.15
         upButton.yScale = 0.15
@@ -178,7 +175,7 @@ class GameScene: SKScene {
 		
 		let downButton = Button(type: .down)
 		downButton.action = {[unowned self] in self.touchButton(.down) }
-        downButton.anchorPoint = CGPoint(x: 0,y: 0)
+        downButton.anchorPoint = .zero
         downButton.position = CGPoint(x: frame.minX + 75, y: frame.minY + 25)
         downButton.xScale = 0.15
         downButton.yScale = 0.15
@@ -188,7 +185,7 @@ class GameScene: SKScene {
 		
 		let leftButton = Button(type: .left)
 		leftButton.action = {[unowned self] in self.touchButton(.left) }
-        leftButton.anchorPoint = CGPoint(x: 0,y: 0)
+        leftButton.anchorPoint = .zero
         leftButton.position = CGPoint(x: frame.minX + 40, y: frame.minY + 57.5)
         leftButton.xScale = 0.15
         leftButton.yScale = 0.15
@@ -198,7 +195,7 @@ class GameScene: SKScene {
 		
 		let rightButton = Button(type: .right)
 		rightButton.action = {[unowned self] in self.touchButton(.right) }
-        rightButton.anchorPoint = CGPoint(x: 0,y: 0)
+        rightButton.anchorPoint = .zero
         rightButton.position = CGPoint(x: frame.minX + 105, y: frame.minY + 57.5)
         rightButton.xScale = 0.15
         rightButton.yScale = 0.15
