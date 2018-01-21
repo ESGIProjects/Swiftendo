@@ -7,49 +7,45 @@
 //
 
 import WatchKit
-import Foundation
 import WatchConnectivity
 
-class InterfaceController: WKInterfaceController{
+class InterfaceController: WKInterfaceController {
     
-    var session: WCSession?
-    
-    @IBAction func action() {
-        send(data: "action")
-    }
-    
+    private var session: WCSession?
+	
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+		
         startSession()
     }
+	
+	@IBAction func action() {
+		send(message: "action")
+	}
     
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
-    }
-    
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-    }
-    
-    private func startSession(){
-        if WCSession.isSupported(){
+    private func startSession() {
+        if WCSession.isSupported() {
             session = WCSession.default
             session?.delegate = self
             session?.activate()
         }
     }
     
-    
-    func send(data: String){
-        let data = ["action":data]
-        session?.sendMessage(data, replyHandler: nil)
+    private func send(message: String) {
+		guard let session = session else { return }
+		
+        let data = [
+			"action": message
+		]
+		
+		session.sendMessage(data, replyHandler: nil)
     }
 }
 
-extension InterfaceController: WCSessionDelegate{
+// MARK: - WCSessionDelegate
+extension InterfaceController: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+		
     }
 }
 

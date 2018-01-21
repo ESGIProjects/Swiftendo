@@ -439,7 +439,11 @@ extension GameScene: SKPhysicsContactDelegate {
 extension GameScene: WCSessionDelegate {
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        touchButton(.action)
+		if let action = message["action"] as? String {
+			if action == "action" {
+				touchButton(.action)
+			}
+		}
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
