@@ -109,9 +109,28 @@ class Player {
 			var action: SKAction!
 			
 			if health > 0 {
-				action = SKAction.sequence([blinkSequence, SKAction.fadeIn(withDuration: 0.5)])
+				let sequence = SKAction.sequence([blinkSequence, SKAction.fadeIn(withDuration: 0.5)])
+				let soundNode = SKAudioNode(fileNamed: "Sounds/Effects/LTTP_Link_Hurt.wav")
+				soundNode.autoplayLooped = false
+				node.addChild(soundNode)
+				
+				let sound = SKAction.run {
+					soundNode.run(SKAction.play())
+				}
+				
+				action = SKAction.group([sequence, sound])
 			} else {
-				action = SKAction.sequence([blinkSequence, SKAction.run { [unowned self] in self.scene.gameOver() }])
+				let sequence = SKAction.sequence([blinkSequence, SKAction.run { [unowned self] in self.scene.gameOver() }])
+				
+				let soundNode = SKAudioNode(fileNamed: "Sounds/Effects/LTTP_Link_Dying.wav")
+				soundNode.autoplayLooped = false
+				node.addChild(soundNode)
+				
+				let sound = SKAction.run {
+					soundNode.run(SKAction.play())
+				}
+				
+				action = SKAction.group([sequence, sound])
 			}
 			
 			node.run(action)

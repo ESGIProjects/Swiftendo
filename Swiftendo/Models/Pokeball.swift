@@ -50,7 +50,7 @@ class Pokeball {
 		
 		// Rotate
 		
-		let rotate = SKAction.repeatForever(SKAction.rotate(byAngle: 2 * .pi, duration: 0.5))
+		let rotate = SKAction.repeatForever(SKAction.rotate(byAngle: 2 * .pi, duration: 0.25))
 		
 		// Sound
 		
@@ -59,7 +59,7 @@ class Pokeball {
 		node.addChild(soundNode)
 		
 		let sound = SKAction.run {
-			soundNode.run(SKAction.sequence([SKAction.play()]))//, SKAction.removeFromParent()]))
+			soundNode.run(SKAction.play())
 		}
 		
 		node.run(SKAction.group([moveSequence, sound, rotate]))

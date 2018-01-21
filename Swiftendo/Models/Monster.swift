@@ -71,7 +71,17 @@ class Monster {
 			node.removeAction(forKey: "follow")
 			node.physicsBody?.categoryBitMask = 0
 			node.physicsBody?.contactTestBitMask = 0
-			action = SKAction.sequence([blinkSequence, SKAction.removeFromParent()])
+			let sequence = SKAction.sequence([blinkSequence, SKAction.removeFromParent()])
+			
+			let soundNode = SKAudioNode(fileNamed: "Sounds/Effects/LTTP_Enemy_Kill.wav")
+			soundNode.autoplayLooped = false
+			node.addChild(soundNode)
+			
+			let sound = SKAction.run {
+				soundNode.run(SKAction.play())
+			}
+			
+			action = SKAction.group([sequence, sound])
 		}
 		
 		node.run(action)

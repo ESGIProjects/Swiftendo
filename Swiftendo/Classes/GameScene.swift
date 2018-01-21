@@ -71,7 +71,7 @@ class GameScene: SKScene {
 		addChild(player.node)
 		
 		// Initialize music & buttons
-        //playBackgroundMusic()
+        playBackgroundMusic()
         initButtons()
 		setHearts()
 		
@@ -102,6 +102,7 @@ class GameScene: SKScene {
 			let url = URL(fileURLWithPath: path)
 			backgroundMusic = try? AVAudioPlayer(contentsOf: url)
 			backgroundMusic?.delegate = self
+			backgroundMusic?.volume = 0.7
 			backgroundMusic?.play()
 		}
     }
