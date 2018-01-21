@@ -13,8 +13,8 @@ import GameplayKit
 class Monster {
 	
 	var node: SKSpriteNode
-	var health: Int
-	var speed: Double
+	private var health: Int
+	private var speed: Double
 	
 	init() {
 		health = 1

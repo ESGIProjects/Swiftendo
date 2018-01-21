@@ -10,7 +10,7 @@ import SpriteKit
 
 class RetryButton: SKSpriteNode {
 	
-	let gameScene: GameScene!
+	private let gameScene: GameScene!
 	
 	init(scene: GameScene) {
 		gameScene = scene

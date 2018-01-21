@@ -10,14 +10,14 @@ import SpriteKit
 
 class Player {
 	
-	var scene: GameScene!
+	private var scene: GameScene!
 	
 	var node: SKSpriteNode 
 	var health: Int
 	var direction: Direction
-	var speed: Double
+	private var speed: Double
 	
-	var lastTimeHit = TimeInterval(0)
+	private var lastTimeHit = TimeInterval(0)
 	
 	init(scene: GameScene) {
 		self.scene = scene

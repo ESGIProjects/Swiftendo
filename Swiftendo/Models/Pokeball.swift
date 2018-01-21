@@ -11,8 +11,8 @@ import SpriteKit
 class Pokeball {
 	
 	var node: SKSpriteNode
-	var reach: CGFloat
-	var speed: Double
+	private var reach: CGFloat
+	private var speed: Double
 	
 	init(at position: CGPoint) {
 		reach = 200

@@ -14,18 +14,18 @@ import WatchConnectivity
 
 class GameScene: SKScene {
 	
-	var timer: Timer!
+	private var timer: Timer!
 	
 	// MARK: - SpriteKit properties
-	var cameraNode: SKCameraNode!
-	var tileMapNode: SKTileMapNode!
+	private var cameraNode: SKCameraNode!
+	private var tileMapNode: SKTileMapNode!
 	
 	// MARK: - Music properties
 	
-    var backgroundMusic: AVAudioPlayer?
-    var musicNumber = 0
+    private var backgroundMusic: AVAudioPlayer?
+    private var musicNumber = 0
 	
-	let musicList = [
+	private let musicList = [
 		"Sounds/Hyrule_Castle_SNES",
 		"Sounds/Hyrule_Field_SNES",
 		"Sounds/Dark_World_SNES",
@@ -44,15 +44,15 @@ class GameScene: SKScene {
 	
 	// MARK: - Button properties
 	
-	var buttons = [String: Button]()
+	private var buttons = [String: Button]()
 	
 	// MARK: - Entity properties
 	
-	var player: Player!
-	var monsters = [Monster]()
+	private var player: Player!
+	private var monsters = [Monster]()
 	
 	// MARK: - Apple Watch session
-	var session: WCSession?
+	private var session: WCSession?
 	
 	// MARK: - SKScene
     
@@ -82,7 +82,7 @@ class GameScene: SKScene {
 		timer = launchMonsterGeneration(timeInterval: 5)
     }
 	
-	func launchMonsterGeneration(timeInterval: TimeInterval) -> Timer {
+	private func launchMonsterGeneration(timeInterval: TimeInterval) -> Timer {
 		return Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { [unowned self] _ in
 	
 			let monster = self.spawnMonster()
@@ -98,7 +98,7 @@ class GameScene: SKScene {
 	
 	// MARK: - Helpers
 	
-    func playBackgroundMusic() {
+    private func playBackgroundMusic() {
 		let selectedMusic = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: musicList).first as! String
 		
 		if let path = Bundle.main.path(forResource: selectedMusic, ofType: "mp3") {
@@ -165,7 +165,7 @@ class GameScene: SKScene {
 		}
 	}
 	
-    func initButtons() {
+    private func initButtons() {
 		let upButton = Button(type: .up)
 		upButton.action = {[unowned self] in self.touchButton(.up) }
 		upButton.anchorPoint = CGPoint(x: 0,y: 0)
@@ -226,7 +226,7 @@ class GameScene: SKScene {
 		displayActionButton()
     }
     
-    func startSession() {
+    private func startSession() {
         if WCSession.isSupported() {
             session = WCSession.default
             session?.delegate = self
@@ -234,7 +234,7 @@ class GameScene: SKScene {
         }
     }
 	
-	func touchButton(_ button: ButtonType) {
+	private func touchButton(_ button: ButtonType) {
 		switch button {
 		case .up:
 			player.moveTo(.up)
@@ -255,7 +255,7 @@ class GameScene: SKScene {
 		}
 	}
 	
-	func setCameraConstraints() {
+	private func setCameraConstraints() {
 		guard let camera = camera else { return }
 		
 		let zeroRange = SKRange(constantValue: 0.0)
@@ -281,7 +281,7 @@ class GameScene: SKScene {
 	
 	// MARK: - Create new entity
 	
-	func spawnPlayer() -> Player{
+	private func spawnPlayer() -> Player{
 		let player = Player(scene: self)
 		
 		player.node.position = CGPoint(x: 0, y: 0)
@@ -289,7 +289,7 @@ class GameScene: SKScene {
 		return player
 	}
 	
-	func spawnMonster() -> Monster {
+	private func spawnMonster() -> Monster {
 		let monster = Monster()
         
         let xPosition = (CGFloat(tileMapNode.numberOfColumns) * tileMapNode.tileSize.width)
@@ -302,12 +302,12 @@ class GameScene: SKScene {
 	
 	// MARK: - Collisions
 	
-	func collisionBetween(monster monsterNode: SKNode, player playerNode: SKNode) {
+	private func collisionBetween(monster monsterNode: SKNode, player playerNode: SKNode) {
 		// Player takes damage
 		player.takeDamage()
 	}
 	
-	func collisionBetween(monster monsterNode: SKNode, pokeball: SKNode) {
+	private func collisionBetween(monster monsterNode: SKNode, pokeball: SKNode) {
 		guard let monster = findMonster(from: monsterNode) else { return }
 		
 		// Monster takes damage
@@ -315,7 +315,7 @@ class GameScene: SKScene {
 		monster.takeDamage()
 	}
 	
-	func findMonster(from node: SKNode) -> Monster? {
+	private func findMonster(from node: SKNode) -> Monster? {
 		for monster in monsters {
 			if monster.node == node {
 				return monster
@@ -390,7 +390,7 @@ class GameScene: SKScene {
 		timer = launchMonsterGeneration(timeInterval: 5)
 	}
 	
-	func displayActionButton() {
+	private func displayActionButton() {
 		guard let actionButton = buttons["action"] else { return }
 		
 		if let session = session {
