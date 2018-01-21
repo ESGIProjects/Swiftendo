@@ -44,21 +44,38 @@ class Player {
 			let changeDirection = SKAction.setTexture(SKTexture(imageNamed:"link-\(direction.rawValue)"))
 			
 			let duration = 16 / speed
-			var move: SKAction!
+			var destination: CGPoint!
 			
 			switch direction {
 			case .up:
-				move = SKAction.moveBy(x: 0, y: 16, duration: duration)
+				destination = CGPoint(x: node.position.x, y: node.position.y + 16)
 			case .down:
-				move = SKAction.moveBy(x: 0, y: -16, duration: duration)
+				destination = CGPoint(x: node.position.x, y: node.position.y - 16)
 			case .left:
-				move = SKAction.moveBy(x: -16, y: 0, duration: duration)
+				destination = CGPoint(x: node.position.x - 16, y: node.position.y)
 			case .right:
-				move = SKAction.moveBy(x: 16, y: 0, duration: duration)
+				destination = CGPoint(x: node.position.x + 16, y: node.position.y)
 			}
 			
-			node.run(SKAction.group([changeDirection, move])) { [unowned self] in
-				print("(After move) Player position - x: \(self.node.position.x) y: \(self.node.position.y)")
+			let move = SKAction.move(to: destination, duration: duration)
+			
+			let tileColumn = scene.tileMapNode.tileColumnIndex(fromPosition: destination)
+			let tileRow = scene.tileMapNode.tileRowIndex(fromPosition: destination)
+			guard let tile = scene.tileMapNode.tileDefinition(atColumn: tileColumn, row: tileRow) else { return }
+			
+			var group = [changeDirection]
+			
+			if let destinationTileUserData = tile.userData,
+				let isObstacle = destinationTileUserData.value(forKey: "isObstacle") as? Bool {
+				if !isObstacle {
+					group.append(move)
+				}
+			} else {
+				group.append(move)
+			}
+			
+			node.run(SKAction.group(group)) { [unowned self] in
+				print("(After move)", "Player position -", "x: \(self.node.position.x)", "y: \(self.node.position.y)")
 			}
 		}
 	}

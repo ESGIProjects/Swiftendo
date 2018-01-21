@@ -18,7 +18,7 @@ class GameScene: SKScene {
 	
 	// MARK: - SpriteKit properties
 	private var cameraNode: SKCameraNode!
-	private var tileMapNode: SKTileMapNode!
+	var tileMapNode: SKTileMapNode!
 	
 	// MARK: - Music properties
 	
